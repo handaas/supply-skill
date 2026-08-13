@@ -1,0 +1,4 @@
+interface:
+  display_name: "供应链潜客推荐报告"
+  short_description: "基于 HandaaS 供应链潜客推荐 MCP，按产品关键词生成下游产品 / 下游企业明细 / 高级筛选企业清单的专业 HTML / Markdown / JSON 报告。"
+  default_prompt: "使用 $supply-report 按「产品关键词」生成供应链潜客推荐报告：调用供应链 MCP 工具，产出 HTML + Markdown + JSON 三件套。"
