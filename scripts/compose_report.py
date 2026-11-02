@@ -21,10 +21,9 @@ import argparse
 import datetime as dt
 import json
 import pathlib
-import sys
-from typing import Any, Dict, List, Mapping, Optional
+from typing import Any, Dict, List, Mapping, Optional, Sequence
 
-from common import REPORT_BANNER, REPORT_TYPE, json_dumps, load_json_file, print_json
+from common import REPORT_BANNER, REPORT_TYPE, attach_pagination, call_tool_once, collect_detail_pages, die, json_dumps, load_json_file, paid_call_scope, print_json
 import mcp_client
 from render_report import render_html, render_markdown, html_to_pdf
 
@@ -33,7 +32,6 @@ SAMPLE_PATH = pathlib.Path(__file__).resolve().parent.parent / "assets" / "repor
 # Supply MCP tools.
 T_PRODUCTS = "supply_get_down_stream_products"
 T_ENTERPRISES = "supply_get_down_stream_enterprises"
-T_FILTER_COUNT = "advanced_filter_get_enterprise_count"
 T_FILTER_LIST = "advanced_filter_get_enterprise_list"
 
 
@@ -49,6 +47,8 @@ def _is_api_error(value: Any) -> bool:
     if isinstance(value, str):
         return any(s in value for s in ("接口调用失败", "查询失败", "状态码：4", "状态码：5"))
     if isinstance(value, dict):
+        if value.get("_mcp_error") or value.get("_error") or value.get("isError") is True or value.get("error"):
+            return True
         for v in value.values():
             if isinstance(v, str) and any(s in v for s in ("接口调用失败", "查询失败", "状态码：4", "状态码：5")):
                 return True
@@ -60,12 +60,14 @@ def _first_list(value: Any) -> List[Any]:
     if isinstance(value, dict):
         if _is_api_error(value):
             return []
+        if set(value) <= {"text", "error", "code", "_error", "_mcp_error"}:
+            return []
         for key in ("resultList", "list", "items", "data"):
             if isinstance(value.get(key), list):
                 return value[key]
     if value in (None, "", {}):
         return []
-    return [value]
+    return []
 
 
 def _first_record(value: Any) -> Dict[str, Any]:
@@ -99,7 +101,7 @@ def _int(value: Any) -> Optional[int]:
 
 def _safe_call(tool: str, arguments: Dict[str, Any]) -> Any:
     try:
-        result = mcp_client.call_tool(tool, arguments)
+        result = call_tool_once(mcp_client.call_tool, tool, arguments)
         # Detect API error responses (405, etc.) and return error marker
         if _is_api_error(result):
             return {"_error": "API错误", "_raw": result}
@@ -114,6 +116,16 @@ def _safe_total(payload: Any) -> Any:
             return None
         return payload.get("total")
     return None
+
+
+def _payload_status(payload: Any) -> str:
+    if _is_api_error(payload):
+        return "error"
+    if isinstance(payload, dict) and str(payload.get("text") or "").strip() == "查询数据为空":
+        return "empty"
+    if _first_list(payload) or _safe_total(payload) is not None:
+        return "success" if (_first_list(payload) or _safe_total(payload) not in (0, "0")) else "empty"
+    return "empty"
 
 
 # --------------------------------------------------------------------------- #
@@ -136,7 +148,7 @@ def build_subject(keywords: str, filters: Mapping[str, Any]) -> Dict[str, Any]:
     }
 
 
-def build_metrics(products: Any, enterprises: Any, filter_count: Any) -> List[Dict[str, Any]]:
+def build_metrics(products: Any, enterprises: Any, filter_list: Any) -> List[Dict[str, Any]]:
     metrics: List[Dict[str, Any]] = []
     prod_total = _safe_total(products)
     if prod_total is not None:
@@ -144,29 +156,53 @@ def build_metrics(products: Any, enterprises: Any, filter_count: Any) -> List[Di
     ent_total = _safe_total(enterprises)
     if ent_total is not None:
         metrics.append({"label": "下游企业数", "value": _text(ent_total), "hint": "下游企业检索命中条数"})
-    fc = filter_count if isinstance(filter_count, dict) else {}
-    fc_total = fc.get("total")
-    if fc_total is not None:
-        metrics.append({"label": "高级筛选企业数", "value": _text(fc_total), "hint": "高级筛选条件下符合企业数"})
+    list_total = _safe_total(filter_list)
+    if list_total is not None:
+        metrics.append({"label": "高级筛选企业数", "value": _text(list_total), "hint": "高级筛选条件下符合企业数（直接取自清单接口 total，不单独购买数量接口）"})
     return [m for m in metrics if m.get("value") not in ("", None, "-")]
 
 
-def build_caliber(subject: Mapping[str, Any]) -> Dict[str, Any]:
+def build_caliber(subject: Mapping[str, Any], core: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
     parts = [f"按产品关键词“{subject.get('keywords')}”检索下游产品与企业"]
     if subject.get("main_products"):
         parts.append(f"；下游企业主营产品过滤={subject.get('main_products')}")
-    if subject.get("address") or subject.get("advanced_filter_address"):
-        parts.append(f"；地区过滤={subject.get('address') or subject.get('advanced_filter_address')}")
+    if subject.get("address"):
+        parts.append(f"；下游企业地区过滤={subject.get('address')}")
     if subject.get("is_high_tech"):
         parts.append(f"；高新企业={subject.get('is_high_tech')}")
-    if subject.get("reg_capital_min") or subject.get("reg_capital_max"):
-        parts.append(f"；注册资本区间={subject.get('reg_capital_min')}-{subject.get('reg_capital_max')} 万")
+    if subject.get("is_foreign_trade"):
+        parts.append(f"；外贸企业={subject.get('is_foreign_trade')}")
+    if subject.get("is_top_enterprise"):
+        parts.append(f"；500强企业={subject.get('is_top_enterprise')}")
+    capital_min = subject.get("reg_capital_min")
+    capital_max = subject.get("reg_capital_max")
+    has_min = capital_min not in (None, "")
+    has_max = capital_max not in (None, "")
+    if has_min and has_max:
+        parts.append(f"；注册资本={capital_min}-{capital_max} 万元")
+    elif has_min:
+        parts.append(f"；注册资本≥{capital_min} 万元")
+    elif has_max:
+        parts.append(f"；注册资本≤{capital_max} 万元")
+    advanced_inputs = []
+    if subject.get("advanced_filter_address"):
+        advanced_inputs.append(f"address={subject.get('advanced_filter_address')}")
+    if subject.get("advanced_enterprise_type"):
+        advanced_inputs.append(f"enterpriseType={subject.get('advanced_enterprise_type')}")
+    if advanced_inputs:
+        statuses_value = core.get("source_status") if isinstance(core, Mapping) else None
+        statuses: Mapping[str, Any] = statuses_value if isinstance(statuses_value, Mapping) else {}
+        blocked = "error" in (
+            statuses.get("advanced_filter_list"),
+        )
+        verification = "仅已发送；接口受阻，未验证条件生效" if blocked else "仅记录已发送条件，不独立验证条件生效"
+        parts.append(f"；高级筛选 filterexpression={';'.join(advanced_inputs)}（{verification}）")
     return {
         "match_target": f"产品关键词“{subject.get('keywords')}”",
         "match_type": "".join(parts),
-        "data_scope": "下游产品、下游企业明细、高级筛选企业清单",
-        "products": ["下游产品", "下游企业", "高级筛选企业数量", "高级筛选企业清单"],
-        "limit": "数据来自企业公开数据库；高级筛选清单最多返回 500 条。",
+        "data_scope": "查询范围（非实际获得范围）：下游产品、下游企业明细、高级筛选企业清单；实际获得范围以摘要和 source_status 为准",
+        "products": ["下游产品", "下游企业", "高级筛选企业清单"],
+        "limit": "高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条，符合企业数量直接取自清单接口 total。",
     }
 
 
@@ -193,13 +229,11 @@ def build_core_analysis(products: Any, enterprises: Any, filter_list: Any, subje
     for item in _first_list(enterprises):
         if not isinstance(item, dict):
             continue
-        # 注册资本：优先使用 regCapitalRmb (float, 单位元)，回退到 regCapital 结构
+        # regCapitalRmb 的单位未在工具契约声明，不自行除以 10000 或纳入分桶。
         reg_rmb = item.get("regCapitalRmb")
         reg_text = ""
         if isinstance(reg_rmb, (int, float)) and reg_rmb > 0:
-            # regCapitalRmb 单位为元，转换为万人民币显示
-            reg_text = f"{reg_rmb / 10000:.2f}万人民币"
-            reg_capital_rmb_values.append(float(reg_rmb) / 10000.0)  # store as 万
+            reg_text = f"{reg_rmb:g}（上游原值，单位未声明）"
         else:
             reg = item.get("regCapital") if isinstance(item.get("regCapital"), dict) else {}
             if reg:
@@ -287,6 +321,9 @@ def build_core_analysis(products: Any, enterprises: Any, filter_list: Any, subje
         "工厂型企业占比": f"{factory_enterprise / ent_total_with_flags * 100:.1f}%" if ent_total_with_flags else "-",
     } if ent_total_with_flags else {}
 
+    enterprise_total = _safe_total(enterprises)
+    if enterprise_total is None:
+        enterprise_total = len(enterprise_rows)
     sections = [
         {"key": "product_records", "title": "下游产品", "kind": "table",
          "note": f"按产品关键词“{subject.get('keywords')}”检索，共 {_safe_total(products) or len(product_rows)} 个行业/记录",
@@ -296,21 +333,22 @@ def build_core_analysis(products: Any, enterprises: Any, filter_list: Any, subje
          "chart": {"name": "下游行业", "value": "记录数", "orient": "v"},
          "columns": [("下游行业", "下游行业"), ("记录数", "记录数")]},
         {"key": "enterprise_records", "title": "下游企业明细", "kind": "table",
-         "note": f"共 {_safe_total(enterprises) or len(enterprise_rows)} 家，展示前 N 家",
+         "note": f"上游命中 {enterprise_total} 家，本次归纳 {len(enterprise_rows)} 家",
          "columns": [("企业名称", "企业名称"), ("主营产品", "主营产品"), ("城市", "城市"), ("注册资本", "注册资本"), ("成立时间", "成立时间"), ("推荐理由", "推荐理由")]},
         {"key": "product_relation", "title": "产品关联", "kind": "table",
          "note": "下游产品(headWord)→关键词(tailWord)→关联理由（来源：factoryRecommendReason）",
          "columns": [("企业名称", "企业名称"), ("下游产品", "下游产品"), ("关键词", "关键词"), ("关联理由", "关联理由")]},
-        {"key": "factory_qualification", "title": "验厂/工厂型资质", "kind": "kv",
-         "note": "已验厂(factoryInspectionType)与工厂型企业(isFactoryEnterprise)占比（基于当前样本）"},
+        {"key": "factory_qualification", "title": "下游候选平台字段", "kind": "kv",
+         "note": "已验厂(factoryInspectionType)与工厂型企业(isFactoryEnterprise)仅为平台返回字段的归纳样本比例；对象是下游候选，不用于认定资质、采购适配或合作风险"},
         {"key": "region_dist", "title": "下游企业地域分布", "kind": "bar",
-         "note": "按城市聚合下游企业样本数（产业集群定位）",
+         "note": "按城市聚合归纳的下游企业样本数；不据此认定产业集群或采购需求",
          "chart": {"name": "城市", "value": "企业数", "orient": "h"},
          "columns": [("城市", "城市"), ("企业数", "企业数")]},
     ]
-    if filter_rows or subject.get("advanced_filter_address") or subject.get("advanced_enterprise_type") or subject.get("is_high_tech") or subject.get("is_top_enterprise"):
-        sections.append({"key": "filter_records", "title": "高级筛选企业清单", "kind": "table",
-                         "note": "通过高级筛选条件（地区 / 企业类型 / 高新等）筛选；清单最多 500 家",
+    advanced_requested = bool(subject.get("advanced_filter_address") or subject.get("advanced_enterprise_type"))
+    if advanced_requested:
+        sections.append({"key": "filter_records", "title": "独立高级筛选企业清单", "kind": "table",
+                         "note": "独立全库企业筛选（地区 / 企业类型），不是下游候选企业交集；清单最多 500 家",
                          "columns": [("企业名称", "企业名称"), ("法定代表人", "法定代表人"), ("注册资本", "注册资本"), ("成立时间", "成立时间"), ("企业标签", "企业标签")]})
 
     return {
@@ -323,6 +361,11 @@ def build_core_analysis(products: Any, enterprises: Any, filter_list: Any, subje
         "region_dist": region_dist_rows,
         "filter_records": filter_rows,
         "reg_capital_rmb": reg_capital_rmb_values,
+        "source_status": {
+            "downstream_products": _payload_status(products),
+            "downstream_enterprises": _payload_status(enterprises),
+            "advanced_filter_list": _payload_status(filter_list) if advanced_requested else "not_requested",
+        },
     }
 
 
@@ -365,7 +408,9 @@ def _reg_capital_stats(rows: List[Mapping[str, Any]], rmb_values: Optional[List[
     if not nums:
         for r in rows:
             raw = str(r.get("注册资本") or "")
-            # Extract leading number (handles "50000万人民币").
+            if "单位未声明" in raw:
+                continue
+            # Extract leading number only when the displayed value carries a declared unit.
             import re as _re
             m = _re.search(r"(\d+(?:\.\d+)?)", raw)
             if m:
@@ -388,7 +433,7 @@ def _reg_capital_stats(rows: List[Mapping[str, Any]], rmb_values: Optional[List[
     return {"avg": sum(nums) / len(nums), "count": len(nums), "buckets": buckets}
 
 
-def build_insights(subject: Mapping[str, Any], core: Mapping[str, Any], metrics: List[Mapping[str, Any]]) -> List[Dict[str, Any]]:
+def build_insights(subject: Mapping[str, Any], core: Mapping[str, Any], metrics: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
     insights: List[Dict[str, Any]] = []
     metric_map = {m["label"]: str(m["value"]) for m in metrics}
     prod_n = metric_map.get("下游产品数")
@@ -400,15 +445,15 @@ def build_insights(subject: Mapping[str, Any], core: Mapping[str, Any], metrics:
         insights.append({
             "feature": "下游产品广度",
             "evidence": f"按关键词“{subject.get('keywords')}”检索到下游产品记录 {prod_n} 条。",
-            "interpretation": "下游产品广度反映关键词在供应链中的延伸面；覆盖行业越多，潜在客户领域越宽。",
+            "interpretation": "下游产品广度反映关键词在供应链中的延伸面；覆盖行业越多，关联应用领域越宽。",
         })
 
-    # 2. 潜在客户规模
+    # 2. 下游关联企业规模
     if ent_n:
         insights.append({
-            "feature": "潜在客户规模",
+            "feature": "下游关联企业规模",
             "evidence": f"下游企业检索命中 {ent_n} 家。",
-            "interpretation": "下游企业命中量是潜客池规模的直接信号；结合主营产品与地区可进一步聚焦高价值客户。",
+            "interpretation": "下游企业命中量仅表示产品关联候选范围，不代表企业存在采购意向；需结合业务核验。",
         })
 
     # 3. 下游行业集中度（CR3）
@@ -420,7 +465,7 @@ def build_insights(subject: Mapping[str, Any], core: Mapping[str, Any], metrics:
             insights.append({
                 "feature": "下游行业集中度",
                 "evidence": f"覆盖下游行业 {conc['count']} 个，“{conc['top']}”记录占比约 {conc['top_share']:.0f}%，前 3 行业合计 {conc['cr']:.0f}%（CR3）。",
-                "interpretation": f"下游应用{diversity}；集中度高说明需求集中在少数行业（可深耕），多元分布则抗周期能力强。",
+            "interpretation": f"归纳样本的下游行业记录分布{diversity}；该分布只描述平台返回样本，不证明实际需求规模、采购意向或抗周期能力。",
             })
 
     # 4. 地域集中度（CR3 + 覆盖城市数）
@@ -428,11 +473,10 @@ def build_insights(subject: Mapping[str, Any], core: Mapping[str, Any], metrics:
     if region_dist:
         conc = _concentration_rows(region_dist, "城市", "企业数", 3)
         if conc:
-            cluster = "高度集群化" if conc["top_share"] >= 40 else "分散布局"
             insights.append({
                 "feature": "地域集中度",
                 "evidence": f"覆盖城市 {conc['count']} 个，“{conc['top']}”企业占比约 {conc['top_share']:.0f}%，前 3 城市合计 {conc['cr']:.0f}%（CR3）。",
-                "interpretation": f"地域{cluster}；高集中度区域通常是产业带，便于线下拜访与物流优化，分散布局则需分区域拓展。",
+                "interpretation": "该比例仅描述归纳样本的城市字段分布，不证明产业带、物流效率或区域采购需求。",
             })
 
     # 5. 企业规模结构（注册资本分桶）—— 优先使用 regCapitalRmb 原始值
@@ -446,7 +490,7 @@ def build_insights(subject: Mapping[str, Any], core: Mapping[str, Any], metrics:
         insights.append({
             "feature": "企业规模结构",
             "evidence": f"样本 {cs['count']} 家，平均注册资本 {cs['avg']:.0f} 万；规模分布：大 {b['大型(>10000万)']}、中 {b['中型(2000-10000万)']}、小 {b['小型(500-2000万)']}、微 {b['微型(<500万)']}（最多为“{top_bucket[0]}”，{top_bucket[1]} 家）。",
-            "interpretation": "规模结构反映潜客质量；大中型企业订单稳定但决策链长，小微客户决策快但单量小，需匹配销售策略。",
+            "interpretation": "注册资本结构仅描述当前关联样本；资本字段不等同于客户质量、订单稳定性、决策速度或采购意向。",
         })
 
     # 6. 高级筛选聚焦
@@ -454,21 +498,21 @@ def build_insights(subject: Mapping[str, Any], core: Mapping[str, Any], metrics:
         insights.append({
             "feature": "高级筛选聚焦",
             "evidence": f"高级筛选条件下符合企业 {fc_n} 家。",
-            "interpretation": "高级筛选用于在潜客池中进一步聚焦（地区 / 企业类型 / 资质等），提升线索质量与转化效率。",
+            "interpretation": "高级筛选是独立全库查询，不是下游候选池交集；结果只表示筛选命中，不能推断采购意向。",
         })
 
-    # 验厂 / 工厂型资质洞察
+    # 验厂 / 工厂型平台字段：对象仍是下游候选，仅描述归纳样本比例。
     fq = core.get("factory_qualification") or {}
     if fq and fq.get("样本数"):
-        sample_n = int(fq.get("样本数"))
+        sample_n = _int(fq.get("样本数")) or 0
         inspected_pct = fq.get("已验厂占比", "-")
         factory_pct = fq.get("工厂型企业占比", "-")
         inspected_n = fq.get("已验厂数", 0)
         factory_n = fq.get("工厂型企业数", 0)
         insights.append({
-            "feature": "验厂/工厂型资质",
+            "feature": "下游候选平台字段",
             "evidence": f"样本 {sample_n} 家中，已验厂 {inspected_n} 家（{inspected_pct}）、工厂型企业 {factory_n} 家（{factory_pct}）。",
-            "interpretation": "已验厂比例高意味着供应商资质可查、合作风险较低；工厂型企业占比高通常具备自有产能与定制能力，适合需要深度协同的采购场景。",
+            "interpretation": "以上仅为平台在归纳样本中返回的字段比例；不能据此认定其为供应商、判断资质有效性、采购适配或合作风险。",
         })
 
     if not insights:
@@ -480,13 +524,34 @@ def build_insights(subject: Mapping[str, Any], core: Mapping[str, Any], metrics:
     return insights
 
 
-def build_abstract(subject: Mapping[str, Any], core: Mapping[str, Any], metrics: List[Mapping[str, Any]]) -> str:
+def build_abstract(subject: Mapping[str, Any], core: Mapping[str, Any], metrics: Sequence[Mapping[str, Any]]) -> str:
     kw = subject.get("keywords") or "目标产品"
-    parts = [f"本报告以产品关键词“{kw}”为检索对象，基于供应链潜客推荐数据，系统呈现下游产品、下游企业明细与高级筛选企业清单。"]
+    status_value = core.get("source_status")
+    statuses: Mapping[str, Any] = status_value if isinstance(status_value, dict) else {}
+    available: List[str] = []
+    if statuses.get("downstream_products") == "success":
+        available.append("下游产品记录")
+    if statuses.get("downstream_enterprises") == "success":
+        available.append("下游企业明细")
+    if not statuses:
+        if core.get("product_records"):
+            available.append("下游产品记录")
+        if core.get("enterprise_records"):
+            available.append("下游企业明细")
+    advanced_list_status = statuses.get("advanced_filter_list")
+    if advanced_list_status == "success":
+        available.append("独立高级筛选企业清单及总量")
+    available_text = "、".join(available) if available else "未获得有效业务数据"
+    parts = [f"本报告以产品关键词“{kw}”为检索对象，按实际成功返回呈现：{available_text}。"]
+    if advanced_list_status == "error":
+        if statuses.get("downstream_products") == "success" and statuses.get("downstream_enterprises") == "success":
+            parts.append("高级筛选清单接口受阻，未获得高级筛选企业清单（数量一并缺失，取自清单 total）；下游产品与企业数据仍可用。")
+        else:
+            parts.append("高级筛选清单接口受阻，未获得高级筛选企业清单。")
     if metrics:
         kv = "、".join(f"{m['label']} {m['value']}" for m in metrics[:5])
         parts.append(f"关键指标包括：{kv}。")
-    parts.append("报告同时给出下游产品广度、潜在客户规模与地域集中度的结构化解读，便于销售线索挖掘与供应链拓展参考。")
+    parts.append("报告仅基于实际返回字段作描述；高级筛选与下游候选口径独立，不据此推断采购意向。")
     return "".join(parts)
 
 
@@ -511,7 +576,7 @@ def build_dry_run_payload(keywords: str, filters: Mapping[str, Any]) -> Dict[str
 # Assembly
 # --------------------------------------------------------------------------- #
 
-def _assemble(subject: Mapping[str, Any], core: Mapping[str, Any], metrics: List[Mapping[str, Any]], *, dry_run: bool) -> Dict[str, Any]:
+def _assemble(subject: Mapping[str, Any], core: Mapping[str, Any], metrics: Sequence[Mapping[str, Any]], *, dry_run: bool) -> Dict[str, Any]:
     abstract = build_abstract(subject, core, metrics)
     records = build_records(core)
     insights = build_insights(subject, core, metrics)
@@ -520,7 +585,11 @@ def _assemble(subject: Mapping[str, Any], core: Mapping[str, Any], metrics: List
     secs = ca.get("sections", [])
     if secs:
         total_secs = len(secs)
-        populated = sum(1 for s in secs if isinstance(s, dict) and ca.get(s.get("key")) not in (None, "", [], {}))
+        populated = sum(
+            1 for s in secs if isinstance(s, dict)
+            and ca.get(s.get("key")) not in (None, "", [], {})
+            and not (isinstance(ca.get(s.get("key")), dict) and ca.get(s.get("key"), {}).get("_invalid_evidence"))
+        )
     else:
         total_secs = max(1, len([k for k in ca if k != "sections"]))
         populated = sum(1 for k in ca if k != "sections" and ca.get(k) not in (None, "", [], {}))
@@ -543,7 +612,7 @@ def _assemble(subject: Mapping[str, Any], core: Mapping[str, Any], metrics: List
         "summary": abstract,
         "executive_summary": [item["interpretation"] for item in insights][:5] or [abstract[:120]],
         "metrics": list(metrics),
-        "caliber": build_caliber(subject),
+        "caliber": build_caliber(subject, core),
         "core_analysis": dict(core),
         "representative_records": records,
         "insights": insights,
@@ -552,11 +621,11 @@ def _assemble(subject: Mapping[str, Any], core: Mapping[str, Any], metrics: List
             "products": [
                 {"name": "下游产品", "product_id": "68c02b268cc760ff46ee93c3"},
                 {"name": "下游企业", "product_id": "68c02fb58cc760ff46ee948e"},
-                {"name": "高级筛选企业数量", "product_id": "690342962e32082a0cfd003a"},
                 {"name": "高级筛选企业清单", "product_id": "690367b52e32082a0cfd00ba"},
             ],
             "generated_at": dt.datetime.now().astimezone().isoformat(timespec="seconds"),
             "dry_run": dry_run,
+            "source_status": core.get("source_status", {}),
             "quality_report": quality_report,
         },
     }
@@ -587,39 +656,46 @@ def _advanced_filter_args(filters: Mapping[str, Any]) -> Dict[str, Any]:
         args["address"] = filters["advanced_address"]
     if filters.get("enterprise_type"):
         args["enterpriseType"] = filters["enterprise_type"]
-    if filters.get("reg_capital_min") is not None:
-        args["regCapitalRmbGte"] = filters["reg_capital_min"]
-    if filters.get("reg_capital_max") is not None:
-        args["regCapitalRmbLte"] = filters["reg_capital_max"]
-    if filters.get("is_high_tech"):
-        # advanced_filter 没有 isHighTech 字段，但可用 enterpriseType 表达；此处保留供未来扩展。
-        pass
+    # Do not copy downstream regCapitalMin/Max (documented as 万人民币) into
+    # advanced regCapitalRmbGte/Lte: that tool's unit is not declared.
     return args
 
 
-def build_payload(keywords: str, filters: Mapping[str, Any], page_size: int) -> Dict[str, Any]:
+@paid_call_scope
+def build_payload(keywords: str, filters: Mapping[str, Any], page_size: int, max_pages: int = 1) -> Dict[str, Any]:
+    if isinstance(max_pages, bool) or not isinstance(max_pages, int) or max_pages < 1:
+        raise ValueError("max_pages 必须为正整数")
     # 1. 下游产品
     products = _safe_call(T_PRODUCTS, {"keywords": keywords})
 
     # 2. 下游企业（带过滤）
-    ent_args: Dict[str, Any] = {"keywords": keywords, "pageIndex": 1, "pageSize": page_size}
+    ent_args: Dict[str, Any] = {"keywords": keywords, "pageSize": page_size}
     ent_args.update(_enterprise_filters(filters))
-    enterprises = _safe_call(T_ENTERPRISES, ent_args)
+    enterprises = collect_detail_pages(
+        _safe_call, T_ENTERPRISES, ent_args,
+        get_rows=_first_list, get_total=_safe_total, is_error=_is_api_error,
+        max_pages=max_pages,
+    )
 
     # 3. 高级筛选（仅在提供高级筛选条件时调用）
-    filter_count: Any = {}
+    # advanced_filter_get_enterprise_count 与 list 参数完全一致且 list 已返回同一 total：
+    # 不单独购买数量接口，企业数量直接取自清单接口 total（清单失败时数量一并缺失，不做额外兜底）。
     filter_list: Any = {}
     adv_args = _advanced_filter_args(filters)
     if adv_args:
-        list_args = {**adv_args, "pageIndex": 1, "pageSize": 10}
-        filter_count = _safe_call(T_FILTER_COUNT, {**adv_args, "pageIndex": 1, "pageSize": 10})
-        filter_list = _safe_call(T_FILTER_LIST, list_args)
+        list_args = {**adv_args, "pageSize": 10}
+        filter_list = collect_detail_pages(
+            _safe_call, T_FILTER_LIST, list_args,
+            get_rows=_first_list, get_total=_safe_total, is_error=_is_api_error,
+            max_pages=min(max_pages, 50),
+        )
 
     subject = build_subject(keywords, filters)
     core = build_core_analysis(products, enterprises, filter_list, subject)
-    metrics = build_metrics(products, enterprises, filter_count)
+    metrics = build_metrics(products, enterprises, filter_list)
     _derive_core_metrics(metrics, core if isinstance(core, dict) else {})
-    return _assemble(subject, core, metrics, dry_run=False)
+    report = _assemble(subject, core, metrics, dry_run=False)
+    return attach_pagination(report, {"下游企业": enterprises, "高级筛选企业清单": filter_list})
 
 
 def _derive_core_metrics(metrics: List[Dict[str, Any]], core: Mapping[str, Any]) -> List[Dict[str, Any]]:
@@ -670,6 +746,7 @@ def main() -> None:
     parser.add_argument("--advanced-address", default=None, help="高级筛选地区，支持 ! 前缀表示非，如 !北京,!广州市")
     parser.add_argument("--enterprise-type", default=None, help="高级筛选企业类型，如 个体户,!国有")
     parser.add_argument("--page-size", type=int, default=50, help="下游企业检索分页大小（最多 100）")
+    parser.add_argument("--max-pages", type=int, default=1, help="下游企业/高级筛选清单最多付费翻页数（默认 1；高级筛选接口页数上限 50；仅在明确需要更多结论/证据时增大）")
     parser.add_argument("--dry-run", action="store_true", help="不调用真实 MCP，使用样例数据组装报告骨架")
     parser.add_argument("--output", help="输出 JSON 路径；省略则打印到 stdout")
     parser.add_argument("--report-output", help="同时输出 HTML 报告（.html）与 Markdown 报告（.md）")
@@ -688,10 +765,14 @@ def main() -> None:
         "enterprise_type": args.enterprise_type,
     }
 
+    if not args.dry_run:
+        if args.max_pages is not None and args.max_pages < 1:
+            die("--max-pages 必须为正整数")
+
     if args.dry_run:
         payload = build_dry_run_payload(args.keywords, filters)
     else:
-        payload = build_payload(args.keywords, filters, args.page_size)
+        payload = build_payload(args.keywords, filters, args.page_size, args.max_pages)
 
     if args.output:
         out = pathlib.Path(args.output).expanduser()

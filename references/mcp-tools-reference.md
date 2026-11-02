@@ -64,6 +64,8 @@ product_id：`68c02fb58cc760ff46ee948e`。
 
 用途：通过高级筛选条件查询全国符合要求的企业**数量**（不返回清单）。
 
+> **本 skill 不调用该工具**：`advanced_filter_get_enterprise_list` 参数与其完全一致，且已返回同一筛选口径的 `total`；报告中的「高级筛选企业数」直接取自清单接口 total，避免为同一数量重复付费。
+
 | 参数 | 类型 | 必填 | 说明 |
 | --- | --- | --- | --- |
 | `operStatus` | string | 否 | 营业状态，如 `营业,吊销` |
@@ -103,6 +105,6 @@ product_id：`690367b52e32082a0cfd00ba`。
 
 1. `supply_get_down_stream_products` → 下游产品目录（按行业）。
 2. `supply_get_down_stream_enterprises` → 下游企业清单（可加主营产品 / 地区 / 资质 / 注册资本过滤）。
-3. （可选）`advanced_filter_get_enterprise_count` + `advanced_filter_get_enterprise_list` → 高级筛选聚焦清单（仅在提供高级筛选条件时调用）。
+3. （可选）`advanced_filter_get_enterprise_list` → 高级筛选聚焦清单（仅在提供高级筛选条件时调用；符合企业数量直接取自其 total，不单独调用 `advanced_filter_get_enterprise_count`）。
 
 > 单次报告通常调用 2-4 个工具；主输入始终为产品关键词 `keywords`。
