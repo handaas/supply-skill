@@ -1,0 +1,39 @@
+{
+  "metric_overflows": [],
+  "document_title": "“光伏玻璃,铝边框” 供应链潜客推荐报告",
+  "title_matches": true,
+  "charts": 2,
+  "rendered_charts": 2,
+  "zero_size_charts": 0,
+  "chart_details": [
+    {
+      "width": 984,
+      "height": 300,
+      "instance": true,
+      "renderer": true,
+      "graphics": 47
+    },
+    {
+      "width": 984,
+      "height": 300,
+      "instance": true,
+      "renderer": true,
+      "graphics": 49
+    }
+  ],
+  "page_width": 1905,
+  "viewport_width": 1920,
+  "empty_headers": 0,
+  "script_errors": [],
+  "external_resources": 0,
+  "external_asset_references": 0,
+  "ok": true,
+  "report_html_sha256": "a66ead44b69e8588b1405254b1522d348063c0d102ded74d565f115f928daf6d",
+  "report_json_sha256": "2a17cbb24bc9b4fc84fabb0f6a03eb4321127976b84cb9d3dd22385c1d799bb8",
+  "skill": "supply-skill",
+  "id": "07-solar-components",
+  "browser": "Ego Lite",
+  "space_id": 4,
+  "offline": true,
+  "checked_at": "2026-10-27T03:04:17.582Z"
+}

@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "skill": "supply-skill",
+  "case_id": "02-chip-high-tech",
+  "title": "半导体高新企业潜客",
+  "invocation_id": "1793069212477265000",
+  "provenance": {
+    "integrator_id": "683e574805537ace146cc05e",
+    "runner_sha256": "05777c2f2b0791cb5157aef691206606dade8df7af3b17212285b7ae74632a66",
+    "credential_policy_sha256": "bcabf08a1ca92f28357c0e57a8bae9bfa910eb1d4b204d8195ee3b7a77106eed",
+    "scenario_sha256": "7fd553c053d6476106c9d445b3e933fade86dee068e310524fe82eeac21e21fb",
+    "skill_source_hashes": {
+      "scripts/common.py": "2d3479461f7bb5e0dc323fb4b6955c48f8d40364d8ddfcecaec33ab6812edb7b",
+      "scripts/compose_report.py": "0d8f86e271cb7a93f74fccdc79308e9849ea0f6e5fe419739a651686873b2abb",
+      "scripts/mcp_client.py": "d2e0cd97c81241c9a12552fad257d6ff00f78b01c2e1286d1d8395221fc7336d",
+      "scripts/render_report.py": "d9a1b988aa111b969094ccb5dcbdb91ba09b7a5591c0cfa935cb3553232c91bd",
+      "scripts/validate_config.py": "ef656d38fc698cf733507c2e9d6c811b18c734385a8ff12dbf46e76fd687b0d2"
+    },
+    "upstream_source_hashes": {
+      "supply-mcp-server": "8e8bb9cefb0bb99c510f31ac4b136dab58fc6f171cf56cea8bbaad9846c8cd36"
+    },
+    "upstream_dependency_hashes": {
+      "supply-mcp-server/server/mcp_server.py": "8e8bb9cefb0bb99c510f31ac4b136dab58fc6f171cf56cea8bbaad9846c8cd36"
+    }
+  },
+  "source_changed_during_run": false,
+  "started_at": "2026-10-27T10:46:52+08:00",
+  "elapsed_seconds": 1.484,
+  "returncode": 0,
+  "exception_type": null,
+  "command": "python3 supply-skill/scripts/compose_report.py --keywords '芯片封装材料' --address '江苏省' --is-high-tech '是' --page-size 10 --output supply-skill/output/live-replaced-20261027/02-chip-high-tech/report.json --report-output supply-skill/output/live-replaced-20261027/02-chip-high-tech/report.html",
+  "transport": "local MCP servers via loopback streamable-http",
+  "cache_used": false,
+  "call_count": 2,
+  "successful_data_calls": 2,
+  "empty_calls": 0,
+  "failed_calls": 0,
+  "checks": {
+    "issues": [],
+    "warnings": [],
+    "coverage_pct": 100,
+    "subject": {
+      "keywords": "芯片封装材料",
+      "matchKeyword": "芯片封装材料",
+      "main_products": "",
+      "address": "江苏省",
+      "is_high_tech": "是",
+      "is_top_enterprise": "",
+      "is_foreign_trade": "",
+      "reg_capital_min": "",
+      "reg_capital_max": "",
+      "advanced_filter_address": "",
+      "advanced_enterprise_type": ""
+    },
+    "title": "“芯片封装材料” 供应链潜客推荐报告",
+    "data_mode": null,
+    "metrics": [
+      {
+        "label": "下游产品数",
+        "value": "8",
+        "hint": "下游产品检索命中条数"
+      },
+      {
+        "label": "下游企业数",
+        "value": "538",
+        "hint": "下游企业检索命中条数"
+      },
+      {
+        "label": "下游行业数",
+        "value": "8",
+        "hint": "覆盖的下游行业数量"
+      },
+      {
+        "label": "主要下游行业",
+        "value": "电子行业",
+        "hint": "企业最多的下游行业"
+      },
+      {
+        "label": "覆盖城市数",
+        "value": "5",
+        "hint": "下游企业所在城市数"
+      },
+      {
+        "label": "城市CR3",
+        "value": "80.0%",
+        "hint": "前3大城市企业集中度"
+      },
+      {
+        "label": "下游产品类目",
+        "value": "8",
+        "hint": "关联的下游产品类别数"
+      }
+    ],
+    "quality_report": {
+      "total_sections": 6,
+      "populated_sections": 6,
+      "empty_sections": 0,
+      "coverage_pct": 100
+    },
+    "unregistered_tools": [],
+    "checks": {
+      "json_html_markdown": true,
+      "explicit_live": true,
+      "tool_calls_recorded": 2,
+      "offline_scripts": true,
+      "independent_rerender": true,
+      "offline_browser": true
+    }
+  },
+  "status": "passed",
+  "source_hashes": {
+    "scripts/common.py": "2d3479461f7bb5e0dc323fb4b6955c48f8d40364d8ddfcecaec33ab6812edb7b",
+    "scripts/compose_report.py": "0d8f86e271cb7a93f74fccdc79308e9849ea0f6e5fe419739a651686873b2abb",
+    "scripts/mcp_client.py": "d2e0cd97c81241c9a12552fad257d6ff00f78b01c2e1286d1d8395221fc7336d",
+    "scripts/render_report.py": "d9a1b988aa111b969094ccb5dcbdb91ba09b7a5591c0cfa935cb3553232c91bd",
+    "scripts/validate_config.py": "ef656d38fc698cf733507c2e9d6c811b18c734385a8ff12dbf46e76fd687b0d2"
+  },
+  "technical_status": "passed",
+  "audited_at": "2026-10-27T11:13:04+08:00",
+  "evidence_binding": {
+    "report.json": "e03e6e24fa357f62f792e0a3326f6c74f81e562cb92d81f2716f8ce2b2c466b8",
+    "report.html": "3718f4cbe0d19ba2d8ff3bd590398053e0b5ef93f2e43ba5b6bd25b9e519bea3",
+    "report.md": "f393c07bfe501525a19e616d1b76c17735f1adc43c01f29425a54fc929e2465f",
+    "calls.json": "8e797d1cbd5ed3752568cdfb9054cbbf1bfe9901be5e45dae2f8a8cff79ba8c4",
+    "result.json": "eacd1832e1263ce17fa4d4f1d5fd53418bd85a1a70b27bcc5e3d596995a95d02",
+    "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+  }
+}

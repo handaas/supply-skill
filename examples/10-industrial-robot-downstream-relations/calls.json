@@ -1,0 +1,70 @@
+[
+  {
+    "tool": "supply_get_down_stream_products",
+    "domain": null,
+    "arguments": {
+      "keywords": "工业机器人"
+    },
+    "invocation_id": "1793069219029900000",
+    "elapsed_seconds": 2.047,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 3,
+    "reported_total": 3,
+    "numeric_evidence": [
+      {
+        "path": "total",
+        "value": 3
+      }
+    ],
+    "response_sha256": "47c9a4e8a27c47f39e278a6cb538e8bdc2188693a10f6a07245885506d0a4b36"
+  },
+  {
+    "tool": "supply_get_down_stream_enterprises",
+    "domain": null,
+    "arguments": {
+      "keywords": "工业机器人",
+      "pageIndex": 1,
+      "pageSize": 10
+    },
+    "invocation_id": "1793069219029900000",
+    "elapsed_seconds": 2.293,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 10,
+    "reported_total": 153,
+    "numeric_evidence": [
+      {
+        "path": "resultList[0].regCapital.value",
+        "value": 10000.0
+      },
+      {
+        "path": "resultList[0].regCapitalRmb",
+        "value": 10000.0
+      },
+      {
+        "path": "resultList[4].regCapital.value",
+        "value": 400000.0
+      },
+      {
+        "path": "resultList[4].regCapitalRmb",
+        "value": 400000.0
+      },
+      {
+        "path": "total",
+        "value": 153
+      }
+    ],
+    "response_sha256": "578b14c56cbadc6ffdc312eec759953ad74898172c8f1269dfad4264699f90c0"
+  }
+]

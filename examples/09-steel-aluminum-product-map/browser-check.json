@@ -1,0 +1,39 @@
+{
+  "metric_overflows": [],
+  "document_title": "“钢材,铝材” 供应链潜客推荐报告",
+  "title_matches": true,
+  "charts": 2,
+  "rendered_charts": 2,
+  "zero_size_charts": 0,
+  "chart_details": [
+    {
+      "width": 984,
+      "height": 300,
+      "instance": true,
+      "renderer": true,
+      "graphics": 55
+    },
+    {
+      "width": 984,
+      "height": 300,
+      "instance": true,
+      "renderer": true,
+      "graphics": 33
+    }
+  ],
+  "page_width": 1905,
+  "viewport_width": 1920,
+  "empty_headers": 0,
+  "script_errors": [],
+  "external_resources": 0,
+  "external_asset_references": 0,
+  "ok": true,
+  "report_html_sha256": "92fb124ec3beedc62f1f88b3fe3329f2ef67c92de7004511e6cf1fb06fffd92b",
+  "report_json_sha256": "368a3a537ea29540416aeafb59f6a1d99d47bbf1feebf503a0630349860e4290",
+  "skill": "supply-skill",
+  "id": "09-steel-aluminum-product-map",
+  "browser": "Ego Lite",
+  "space_id": 4,
+  "offline": true,
+  "checked_at": "2026-10-27T03:04:18.982Z"
+}

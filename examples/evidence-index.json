@@ -1,0 +1,77 @@
+{
+  "run_id": "live-replaced-20261027",
+  "cases": [
+    {
+      "skill": "supply-skill",
+      "id": "02-chip-high-tech",
+      "status": "passed",
+      "positive_business_pass": true,
+      "files_sha256": {
+        "report.json": "e03e6e24fa357f62f792e0a3326f6c74f81e562cb92d81f2716f8ce2b2c466b8",
+        "report.html": "3718f4cbe0d19ba2d8ff3bd590398053e0b5ef93f2e43ba5b6bd25b9e519bea3",
+        "report.md": "f393c07bfe501525a19e616d1b76c17735f1adc43c01f29425a54fc929e2465f",
+        "calls.json": "8e797d1cbd5ed3752568cdfb9054cbbf1bfe9901be5e45dae2f8a8cff79ba8c4",
+        "result.json": "eacd1832e1263ce17fa4d4f1d5fd53418bd85a1a70b27bcc5e3d596995a95d02",
+        "audit.json": "47bf0e3b490c03d23861ecabbfe6da50b9432df18d49e37f27593d27da61cc81",
+        "acceptance.json": "5eaff96934c57cedfa51e6777432dc96055332b2fe66141ebb9466b7f40e9181",
+        "business-review.json": "50abbf43040498af21ffd1303350b48b3f22810533409ce91bd6630435184e4d",
+        "browser-check.json": "35c049715f5a22426920df23535af9aab5aa23175fb24ec0f6a3edec672baf46"
+      },
+      "audit_record": "../../test-records/live-replaced-20261027/02-chip-high-tech.md"
+    },
+    {
+      "skill": "supply-skill",
+      "id": "07-solar-components",
+      "status": "passed",
+      "positive_business_pass": true,
+      "files_sha256": {
+        "report.json": "2a17cbb24bc9b4fc84fabb0f6a03eb4321127976b84cb9d3dd22385c1d799bb8",
+        "report.html": "a66ead44b69e8588b1405254b1522d348063c0d102ded74d565f115f928daf6d",
+        "report.md": "f8d0ca3d5374a702204d66332fe0b49e993e163a32a03faec7db267ba8234f08",
+        "calls.json": "74c9757b97975dfeb23418c1cde8934a203c0a396f337932534f57c652664efe",
+        "result.json": "36bd640a464fce7197b9bf3e7b6d1f80764a4fd9c5043bfb90ed5c8e6bbc2f05",
+        "audit.json": "f967c0fed4322f4502cd487ac6d2a479696e9a695d8fab17a86ac6352b707afa",
+        "acceptance.json": "10f63c92458b8d101f42511e7360e479c481034deaa5475e877a1cfc5e74ccb5",
+        "business-review.json": "3aa2e0c93b4f5220aec7778c0a7235b1045d4b05c8ffb918918630c3e1bc3321",
+        "browser-check.json": "9def705c90f8df5520996550dc59590863ad556863b2e845387ef21348b88c83"
+      },
+      "audit_record": "../../test-records/live-replaced-20261027/07-solar-components.md"
+    },
+    {
+      "skill": "supply-skill",
+      "id": "09-steel-aluminum-product-map",
+      "status": "passed",
+      "positive_business_pass": true,
+      "files_sha256": {
+        "report.json": "368a3a537ea29540416aeafb59f6a1d99d47bbf1feebf503a0630349860e4290",
+        "report.html": "92fb124ec3beedc62f1f88b3fe3329f2ef67c92de7004511e6cf1fb06fffd92b",
+        "report.md": "696fb38785c0bb00b59661e04b3570c02f130573ef3e70601d1e08d450bf689b",
+        "calls.json": "9c396c711feb81320e10c12fa2415f76ac877083a0f6d94de7e274e8fe32211e",
+        "result.json": "2cc3c1f1f164a0d90edb7c06c08181016c7e6502357b6ab04e334acb16397f6a",
+        "audit.json": "f5e3aeab8c04a671bf678648b23df7b44ffca72c0f1903be4edd97fa41ecb1f6",
+        "acceptance.json": "cd8aaedbcba674bfbb03a7763b2a295cc1f9bab87832905a47d90caa03208b8b",
+        "business-review.json": "1b886e832733211a5d3fa6bfd94a20936a353281d49e8b272ae0b96b616f22ac",
+        "browser-check.json": "dc49587fb6dd48c6b197bf4ce8b1bff7f117b330c167ec75cf08c6214b7e289d"
+      },
+      "audit_record": "../../test-records/live-replaced-20261027/09-steel-aluminum-product-map.md"
+    },
+    {
+      "skill": "supply-skill",
+      "id": "10-industrial-robot-downstream-relations",
+      "status": "passed",
+      "positive_business_pass": true,
+      "files_sha256": {
+        "report.json": "add81ac781c148c7c10b86085018bbb24727413539bc90edcaa75618e425c4b6",
+        "report.html": "7b76dad2c357eca83d328f9cceb69bba6dcd41dd0ec46e57885d5caa1c35c200",
+        "report.md": "1e9a1a340cbd5ab398cbdccf69c45466f497682aef31dea068a6996d2d83bb05",
+        "calls.json": "34c03f2e989d27ef858499ffa9305817e1b71bda508299455e9686ecac3070c9",
+        "result.json": "fafb4d988150e40469efc019ee317c2c1e5209c4c03b6d8318e095c96a0f046b",
+        "audit.json": "4321e23f94495b3b1d7e69e8fbbb7e7e150d55440a8624a8c6ed23d5cccbb02c",
+        "acceptance.json": "a6f803296d16163ee0bd8c3bfd30864718d43ee0958161bbd888fef9ad3c6d68",
+        "business-review.json": "86047bed1552d6b09d34b922235a2baebabad092abfc07ddf66815cde732a150",
+        "browser-check.json": "d07ef1b760d0661b1e5d568811db9f79ac4eeaacb68f80b401e2eb42e7a87ddb"
+      },
+      "audit_record": "../../test-records/live-replaced-20261027/10-industrial-robot-downstream-relations.md"
+    }
+  ]
+}

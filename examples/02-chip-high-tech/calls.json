@@ -1,0 +1,96 @@
+[
+  {
+    "tool": "supply_get_down_stream_products",
+    "domain": null,
+    "arguments": {
+      "keywords": "芯片封装材料"
+    },
+    "invocation_id": "1793069212477265000",
+    "elapsed_seconds": 0.566,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 8,
+    "reported_total": 8,
+    "numeric_evidence": [
+      {
+        "path": "total",
+        "value": 8
+      }
+    ],
+    "response_sha256": "a3c46167918affddd9618da0f11b95ba97e1a6ecabaae6e91dd79843dcb301a2"
+  },
+  {
+    "tool": "supply_get_down_stream_enterprises",
+    "domain": null,
+    "arguments": {
+      "keywords": "芯片封装材料",
+      "pageIndex": 1,
+      "pageSize": 10,
+      "address": "江苏省",
+      "isHighTechEnterprise": "是"
+    },
+    "invocation_id": "1793069212477265000",
+    "elapsed_seconds": 0.807,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 10,
+    "reported_total": 538,
+    "numeric_evidence": [
+      {
+        "path": "resultList[0].regCapital.value",
+        "value": 6000000.0
+      },
+      {
+        "path": "resultList[0].regCapitalRmb",
+        "value": 6000000.0
+      },
+      {
+        "path": "resultList[1].regCapital.value",
+        "value": 8000000.0
+      },
+      {
+        "path": "resultList[1].regCapitalRmb",
+        "value": 8000000.0
+      },
+      {
+        "path": "resultList[2].regCapital.value",
+        "value": 10000000.0
+      },
+      {
+        "path": "resultList[2].regCapitalRmb",
+        "value": 10000000.0
+      },
+      {
+        "path": "resultList[3].regCapital.value",
+        "value": 326860200.0
+      },
+      {
+        "path": "resultList[3].regCapitalRmb",
+        "value": 326860200.0
+      },
+      {
+        "path": "resultList[4].regCapital.value",
+        "value": 20000000.0
+      },
+      {
+        "path": "resultList[4].regCapitalRmb",
+        "value": 20000000.0
+      },
+      {
+        "path": "total",
+        "value": 538
+      }
+    ],
+    "response_sha256": "69fcce084ae13d517f5f4880e6b1125f5d8faa034ee09c6bb7cf2c055d720d5e"
+  }
+]

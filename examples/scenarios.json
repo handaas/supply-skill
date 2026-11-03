@@ -1,0 +1,103 @@
+{
+  "skill": "supply-skill",
+  "kind": "verified_positive_examples",
+  "run_id": "live-replaced-20261027",
+  "source_manifest": "../test-records/scenarios-20261027.json",
+  "scenarios": [
+    {
+      "id": "02-chip-high-tech",
+      "title": "半导体高新企业潜客",
+      "user_request": "寻找芯片封装材料的高新技术下游企业，重点关注长三角地区。",
+      "purpose": "为技术型材料产品建立区域潜客清单。",
+      "args": [
+        "--keywords",
+        "芯片封装材料",
+        "--address",
+        "江苏省",
+        "--is-high-tech",
+        "是",
+        "--page-size",
+        "10"
+      ],
+      "expected_checks": [
+        "高新技术和地区过滤明确",
+        "下游产品与企业记录分章呈现",
+        "高新属性不被扩展为技术采购需求",
+        "无结果时保留筛选条件"
+      ],
+      "limitations": [
+        "高新资质可能存在有效期",
+        "需进一步核验企业具体工艺需求"
+      ]
+    },
+    {
+      "id": "07-solar-components",
+      "title": "光伏组件下游市场扫描",
+      "user_request": "扫描光伏玻璃和铝边框的下游产品及企业，了解潜在客户行业分布。",
+      "purpose": "评估产品组合可覆盖的下游行业广度。",
+      "args": [
+        "--keywords",
+        "光伏玻璃,铝边框",
+        "--page-size",
+        "10"
+      ],
+      "expected_checks": [
+        "两个关键词均出现在查询口径",
+        "下游产品和下游企业数量可核对",
+        "行业分布基于实际返回记录",
+        "不把样本占比描述为市场份额"
+      ],
+      "limitations": [
+        "结果是潜客发现而非市场规模统计",
+        "多关键词可能产生重复企业"
+      ]
+    },
+    {
+      "id": "09-steel-aluminum-product-map",
+      "title": "钢铝下游行业—产品映射",
+      "user_request": "请查询钢材和铝材对应的下游行业与具体产品，用于整理应用场景词表；不要承诺返回企业名单或采购线索。",
+      "purpose": "构建可追溯的材料—行业—产品映射。",
+      "args": [
+        "--keywords",
+        "钢材,铝材",
+        "--page-size",
+        "10"
+      ],
+      "expected_checks": [
+        "product_records 至少有两条实际返回记录",
+        "每条计入映射的记录必须同时具备非空下游行业和下游产品",
+        "至少两个不同下游行业各有具体产品文本",
+        "映射结论必须来自 product_records 实际字段，不能只用关键词参数、行业总数或企业空结果",
+        "不得把产品映射解释为采购意向或供应关系"
+      ],
+      "limitations": [
+        "产品映射不是潜客名单",
+        "行业关联不证明现实交易或需求时点"
+      ]
+    },
+    {
+      "id": "10-industrial-robot-downstream-relations",
+      "title": "工业机器人下游应用与关系样本",
+      "user_request": "请查询工业机器人的下游应用行业、当前页候选企业和产品关联理由；不要启用高级筛选，也不要认定采购意向或合格供应商。",
+      "purpose": "审查普通下游产品、企业与推荐理由能否形成可追溯关系样本。",
+      "args": [
+        "--keywords",
+        "工业机器人",
+        "--page-size",
+        "10"
+      ],
+      "expected_checks": [
+        "product_records 与 enterprise_records 均至少有一条实际返回记录",
+        "至少一条 product_relation 同时具备非空企业名称、下游产品、关键词和关联理由",
+        "关系记录中的企业名称必须能在 enterprise_records 找到对应实体",
+        "推荐理由必须保留为上游关联说明，不得改写为采购意向",
+        "不得仅凭企业总数、城市数或高级筛选未请求而通过"
+      ],
+      "limitations": [
+        "推荐理由仍需人工复核",
+        "工厂型企业字段不代表验厂或资质",
+        "普通下游结果不是高级筛选结果"
+      ]
+    }
+  ]
+}

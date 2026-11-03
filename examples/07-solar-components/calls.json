@@ -1,0 +1,62 @@
+[
+  {
+    "tool": "supply_get_down_stream_products",
+    "domain": null,
+    "arguments": {
+      "keywords": "光伏玻璃,铝边框"
+    },
+    "invocation_id": "1793069218465268000",
+    "elapsed_seconds": 1.333,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 8,
+    "reported_total": 8,
+    "numeric_evidence": [
+      {
+        "path": "total",
+        "value": 8
+      }
+    ],
+    "response_sha256": "3917470805da95867af86b49888fa5b877161019882caf4806da1aabafb988c0"
+  },
+  {
+    "tool": "supply_get_down_stream_enterprises",
+    "domain": null,
+    "arguments": {
+      "keywords": "光伏玻璃,铝边框",
+      "pageIndex": 1,
+      "pageSize": 10
+    },
+    "invocation_id": "1793069218465268000",
+    "elapsed_seconds": 2.488,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 10,
+    "reported_total": 1000,
+    "numeric_evidence": [
+      {
+        "path": "resultList[4].regCapital.value",
+        "value": 300000.0
+      },
+      {
+        "path": "resultList[4].regCapitalRmb",
+        "value": 300000.0
+      },
+      {
+        "path": "total",
+        "value": 1000
+      }
+    ],
+    "response_sha256": "e1503f74dd65491717fab198ff7500c36afd2ac3caa21d5f2378ab1546b0c1db"
+  }
+]

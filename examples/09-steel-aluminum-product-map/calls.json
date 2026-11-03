@@ -1,0 +1,70 @@
+[
+  {
+    "tool": "supply_get_down_stream_products",
+    "domain": null,
+    "arguments": {
+      "keywords": "钢材,铝材"
+    },
+    "invocation_id": "1793069218487283000",
+    "elapsed_seconds": 1.32,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 10,
+    "reported_total": 10,
+    "numeric_evidence": [
+      {
+        "path": "total",
+        "value": 10
+      }
+    ],
+    "response_sha256": "9db16eb21266e1753af95c5b3cce7a3990812fc8dee33de7c650192f9806e73d"
+  },
+  {
+    "tool": "supply_get_down_stream_enterprises",
+    "domain": null,
+    "arguments": {
+      "keywords": "钢材,铝材",
+      "pageIndex": 1,
+      "pageSize": 10
+    },
+    "invocation_id": "1793069218487283000",
+    "elapsed_seconds": 2.483,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 10,
+    "reported_total": 1000,
+    "numeric_evidence": [
+      {
+        "path": "resultList[2].regCapital.value",
+        "value": 32000.0
+      },
+      {
+        "path": "resultList[2].regCapitalRmb",
+        "value": 32000.0
+      },
+      {
+        "path": "resultList[3].regCapital.value",
+        "value": 200000.0
+      },
+      {
+        "path": "resultList[3].regCapitalRmb",
+        "value": 200000.0
+      },
+      {
+        "path": "total",
+        "value": 1000
+      }
+    ],
+    "response_sha256": "01801bcb452eb42fcb34298d61d4d865666116524c33624d1968c28a606be20e"
+  }
+]

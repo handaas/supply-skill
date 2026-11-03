@@ -1,0 +1,778 @@
+{
+  "run_id": "live-replaced-20261027",
+  "skill": "supply-skill",
+  "counts": {
+    "passed": 4
+  },
+  "scenarios": [
+    {
+      "scenario": {
+        "id": "02-chip-high-tech",
+        "title": "半导体高新企业潜客",
+        "user_request": "寻找芯片封装材料的高新技术下游企业，重点关注长三角地区。",
+        "purpose": "为技术型材料产品建立区域潜客清单。",
+        "args": [
+          "--keywords",
+          "芯片封装材料",
+          "--address",
+          "江苏省",
+          "--is-high-tech",
+          "是",
+          "--page-size",
+          "10"
+        ],
+        "expected_checks": [
+          "高新技术和地区过滤明确",
+          "下游产品与企业记录分章呈现",
+          "高新属性不被扩展为技术采购需求",
+          "无结果时保留筛选条件"
+        ],
+        "limitations": [
+          "高新资质可能存在有效期",
+          "需进一步核验企业具体工艺需求"
+        ]
+      },
+      "result": {
+        "schema_version": 1,
+        "skill": "supply-skill",
+        "case_id": "02-chip-high-tech",
+        "title": "半导体高新企业潜客",
+        "invocation_id": "1793069212477265000",
+        "provenance": {
+          "integrator_id": "683e574805537ace146cc05e",
+          "runner_sha256": "05777c2f2b0791cb5157aef691206606dade8df7af3b17212285b7ae74632a66",
+          "credential_policy_sha256": "bcabf08a1ca92f28357c0e57a8bae9bfa910eb1d4b204d8195ee3b7a77106eed",
+          "scenario_sha256": "7fd553c053d6476106c9d445b3e933fade86dee068e310524fe82eeac21e21fb",
+          "skill_source_hashes": {
+            "scripts/common.py": "2d3479461f7bb5e0dc323fb4b6955c48f8d40364d8ddfcecaec33ab6812edb7b",
+            "scripts/compose_report.py": "0d8f86e271cb7a93f74fccdc79308e9849ea0f6e5fe419739a651686873b2abb",
+            "scripts/mcp_client.py": "d2e0cd97c81241c9a12552fad257d6ff00f78b01c2e1286d1d8395221fc7336d",
+            "scripts/render_report.py": "d9a1b988aa111b969094ccb5dcbdb91ba09b7a5591c0cfa935cb3553232c91bd",
+            "scripts/validate_config.py": "ef656d38fc698cf733507c2e9d6c811b18c734385a8ff12dbf46e76fd687b0d2"
+          },
+          "upstream_source_hashes": {
+            "supply-mcp-server": "8e8bb9cefb0bb99c510f31ac4b136dab58fc6f171cf56cea8bbaad9846c8cd36"
+          },
+          "upstream_dependency_hashes": {
+            "supply-mcp-server/server/mcp_server.py": "8e8bb9cefb0bb99c510f31ac4b136dab58fc6f171cf56cea8bbaad9846c8cd36"
+          }
+        },
+        "source_changed_during_run": false,
+        "started_at": "2026-10-27T10:46:52+08:00",
+        "elapsed_seconds": 1.484,
+        "returncode": 0,
+        "exception_type": null,
+        "command": "python3 supply-skill/scripts/compose_report.py --keywords '芯片封装材料' --address '江苏省' --is-high-tech '是' --page-size 10 --output supply-skill/output/live-replaced-20261027/02-chip-high-tech/report.json --report-output supply-skill/output/live-replaced-20261027/02-chip-high-tech/report.html",
+        "transport": "local MCP servers via loopback streamable-http",
+        "cache_used": false,
+        "call_count": 2,
+        "successful_data_calls": 2,
+        "empty_calls": 0,
+        "failed_calls": 0,
+        "checks": {
+          "issues": [],
+          "warnings": [],
+          "coverage_pct": 100,
+          "subject": {
+            "keywords": "芯片封装材料",
+            "matchKeyword": "芯片封装材料",
+            "main_products": "",
+            "address": "江苏省",
+            "is_high_tech": "是",
+            "is_top_enterprise": "",
+            "is_foreign_trade": "",
+            "reg_capital_min": "",
+            "reg_capital_max": "",
+            "advanced_filter_address": "",
+            "advanced_enterprise_type": ""
+          },
+          "title": "“芯片封装材料” 供应链潜客推荐报告",
+          "data_mode": null,
+          "metrics": [
+            {
+              "label": "下游产品数",
+              "value": "8",
+              "hint": "下游产品检索命中条数"
+            },
+            {
+              "label": "下游企业数",
+              "value": "538",
+              "hint": "下游企业检索命中条数"
+            },
+            {
+              "label": "下游行业数",
+              "value": "8",
+              "hint": "覆盖的下游行业数量"
+            },
+            {
+              "label": "主要下游行业",
+              "value": "电子行业",
+              "hint": "企业最多的下游行业"
+            },
+            {
+              "label": "覆盖城市数",
+              "value": "5",
+              "hint": "下游企业所在城市数"
+            },
+            {
+              "label": "城市CR3",
+              "value": "80.0%",
+              "hint": "前3大城市企业集中度"
+            },
+            {
+              "label": "下游产品类目",
+              "value": "8",
+              "hint": "关联的下游产品类别数"
+            }
+          ],
+          "quality_report": {
+            "total_sections": 6,
+            "populated_sections": 6,
+            "empty_sections": 0,
+            "coverage_pct": 100
+          },
+          "unregistered_tools": [],
+          "checks": {
+            "json_html_markdown": true,
+            "explicit_live": true,
+            "tool_calls_recorded": 2,
+            "offline_scripts": true,
+            "independent_rerender": true,
+            "offline_browser": true
+          }
+        },
+        "status": "passed",
+        "source_hashes": {
+          "scripts/common.py": "2d3479461f7bb5e0dc323fb4b6955c48f8d40364d8ddfcecaec33ab6812edb7b",
+          "scripts/compose_report.py": "0d8f86e271cb7a93f74fccdc79308e9849ea0f6e5fe419739a651686873b2abb",
+          "scripts/mcp_client.py": "d2e0cd97c81241c9a12552fad257d6ff00f78b01c2e1286d1d8395221fc7336d",
+          "scripts/render_report.py": "d9a1b988aa111b969094ccb5dcbdb91ba09b7a5591c0cfa935cb3553232c91bd",
+          "scripts/validate_config.py": "ef656d38fc698cf733507c2e9d6c811b18c734385a8ff12dbf46e76fd687b0d2"
+        },
+        "technical_status": "passed",
+        "audited_at": "2026-10-27T11:13:04+08:00",
+        "evidence_binding": {
+          "report.json": "e03e6e24fa357f62f792e0a3326f6c74f81e562cb92d81f2716f8ce2b2c466b8",
+          "report.html": "3718f4cbe0d19ba2d8ff3bd590398053e0b5ef93f2e43ba5b6bd25b9e519bea3",
+          "report.md": "f393c07bfe501525a19e616d1b76c17735f1adc43c01f29425a54fc929e2465f",
+          "calls.json": "8e797d1cbd5ed3752568cdfb9054cbbf1bfe9901be5e45dae2f8a8cff79ba8c4",
+          "result.json": "eacd1832e1263ce17fa4d4f1d5fd53418bd85a1a70b27bcc5e3d596995a95d02",
+          "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+        },
+        "business_review": {
+          "id": "02-chip-high-tech",
+          "verdict": "acceptable",
+          "summary": "本轮真实产物的全部清单检查均有当前字段证据，且报告保留样本/缺失/关系边界。",
+          "checks": [
+            {
+              "expectation": "高新技术和地区过滤明确",
+              "status": "pass",
+              "evidence": "该项由当前调用参数、报告同名字段、样本与局限说明共同核对。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":8,\"total\":8,\"args\":{\"keywords\":\"芯片封装材料\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":538,\"args\":{\"keywords\":\"芯片封装材料\",\"pageIndex\":1,\"pageSize\":10,\"address\":\"江苏省\",\"isHighTechEnterprise\":\"是\"}}],\"subject\":{\"keywords\":\"芯片封装材料\",\"matchKeyword\":\"芯片封装材料\",\"main_products\":\"\",\"address\":\"江苏省\",\"is_high_tech\":\"是\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"8\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"538\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"8\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"电子行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"5\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"80.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"8\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":8,\"industry_dist\":8,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":5,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"电子行业\",\"下游产品\":\"芯片组、晶振、光电器件、内存条、集成电路、传感器\"},{\"下游行业\":\"医疗行业\",\"下游产品\":\"血糖仪、血压计、体温计\"}],\"enterprise_records\":[{\"企业名称\":\"昆山双桥传感器测控技术有限公司\",\"主营产品\":\"[\\\"传感器\\\", \\\"定制压力传感器\\\", \\\"差压变送器\\\", \\\"压力变送器\\\", \\\"投入式液位变送器\\\", \\\"微型薄型压力传感\\\", \\\"工业压力监测\\\", \\\"智能压力开关\\\", \\\"脉动压力传感器\\\", \\\"敏感芯片\\\"]\",\"城市\":\"苏州市\",\"注册资本\":\"6e+06（上游原值，单位未声明）\",\"成立时间\":\"2001-02-23\",\"推荐理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"},{\"企业名称\":\"无锡众测传感器技术有限公司\",\"主营产品\":\"[\\\"传感器\\\", \\\"直管铂电阻\\\", \\\"热电偶温度传感器\\\", \\\"铂电阻温度传感器\\\", \\\"测温元件\\\", \\\"螺纹封装热敏电阻\\\", \\\"直管封装热敏电阻\\\", \\\"测温探头\\\", \\\"防腐铂电阻\\\", \\\"表贴式热敏电阻器\\\", \\\"水温传感器\\\", \\\"温度传感器\\\", \\\"高温热电偶\\\", \\\"测温传感器\\\", \\\"工业型压力变送器\\\", \\\"温度传感器探头\\\", \\\"薄膜铂电阻\\\"]\",\"城市\":\"无锡市\",\"注册资本\":\"8e+06（上游原值，单位未声明）\",\"成立时间\":\"2017-09-05\",\"推荐理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"}],\"product_relation\":[{\"企业名称\":\"昆山双桥传感器测控技术有限公司\",\"下游产品\":\"传感器\",\"关键词\":\"芯片封装材料\",\"关联理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"},{\"企业名称\":\"无锡众测传感器技术有限公司\",\"下游产品\":\"传感器\",\"关键词\":\"芯片封装材料\",\"关联理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1106677,\"markdown_bytes\":32733}"
+            },
+            {
+              "expectation": "下游产品与企业记录分章呈现",
+              "status": "pass",
+              "evidence": "该项由当前调用参数、报告同名字段、样本与局限说明共同核对。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":8,\"total\":8,\"args\":{\"keywords\":\"芯片封装材料\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":538,\"args\":{\"keywords\":\"芯片封装材料\",\"pageIndex\":1,\"pageSize\":10,\"address\":\"江苏省\",\"isHighTechEnterprise\":\"是\"}}],\"subject\":{\"keywords\":\"芯片封装材料\",\"matchKeyword\":\"芯片封装材料\",\"main_products\":\"\",\"address\":\"江苏省\",\"is_high_tech\":\"是\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"8\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"538\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"8\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"电子行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"5\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"80.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"8\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":8,\"industry_dist\":8,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":5,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"电子行业\",\"下游产品\":\"芯片组、晶振、光电器件、内存条、集成电路、传感器\"},{\"下游行业\":\"医疗行业\",\"下游产品\":\"血糖仪、血压计、体温计\"}],\"enterprise_records\":[{\"企业名称\":\"昆山双桥传感器测控技术有限公司\",\"主营产品\":\"[\\\"传感器\\\", \\\"定制压力传感器\\\", \\\"差压变送器\\\", \\\"压力变送器\\\", \\\"投入式液位变送器\\\", \\\"微型薄型压力传感\\\", \\\"工业压力监测\\\", \\\"智能压力开关\\\", \\\"脉动压力传感器\\\", \\\"敏感芯片\\\"]\",\"城市\":\"苏州市\",\"注册资本\":\"6e+06（上游原值，单位未声明）\",\"成立时间\":\"2001-02-23\",\"推荐理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"},{\"企业名称\":\"无锡众测传感器技术有限公司\",\"主营产品\":\"[\\\"传感器\\\", \\\"直管铂电阻\\\", \\\"热电偶温度传感器\\\", \\\"铂电阻温度传感器\\\", \\\"测温元件\\\", \\\"螺纹封装热敏电阻\\\", \\\"直管封装热敏电阻\\\", \\\"测温探头\\\", \\\"防腐铂电阻\\\", \\\"表贴式热敏电阻器\\\", \\\"水温传感器\\\", \\\"温度传感器\\\", \\\"高温热电偶\\\", \\\"测温传感器\\\", \\\"工业型压力变送器\\\", \\\"温度传感器探头\\\", \\\"薄膜铂电阻\\\"]\",\"城市\":\"无锡市\",\"注册资本\":\"8e+06（上游原值，单位未声明）\",\"成立时间\":\"2017-09-05\",\"推荐理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"}],\"product_relation\":[{\"企业名称\":\"昆山双桥传感器测控技术有限公司\",\"下游产品\":\"传感器\",\"关键词\":\"芯片封装材料\",\"关联理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"},{\"企业名称\":\"无锡众测传感器技术有限公司\",\"下游产品\":\"传感器\",\"关键词\":\"芯片封装材料\",\"关联理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1106677,\"markdown_bytes\":32733}"
+            },
+            {
+              "expectation": "高新属性不被扩展为技术采购需求",
+              "status": "pass",
+              "evidence": "该项由当前调用参数、报告同名字段、样本与局限说明共同核对。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":8,\"total\":8,\"args\":{\"keywords\":\"芯片封装材料\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":538,\"args\":{\"keywords\":\"芯片封装材料\",\"pageIndex\":1,\"pageSize\":10,\"address\":\"江苏省\",\"isHighTechEnterprise\":\"是\"}}],\"subject\":{\"keywords\":\"芯片封装材料\",\"matchKeyword\":\"芯片封装材料\",\"main_products\":\"\",\"address\":\"江苏省\",\"is_high_tech\":\"是\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"8\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"538\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"8\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"电子行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"5\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"80.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"8\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":8,\"industry_dist\":8,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":5,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"电子行业\",\"下游产品\":\"芯片组、晶振、光电器件、内存条、集成电路、传感器\"},{\"下游行业\":\"医疗行业\",\"下游产品\":\"血糖仪、血压计、体温计\"}],\"enterprise_records\":[{\"企业名称\":\"昆山双桥传感器测控技术有限公司\",\"主营产品\":\"[\\\"传感器\\\", \\\"定制压力传感器\\\", \\\"差压变送器\\\", \\\"压力变送器\\\", \\\"投入式液位变送器\\\", \\\"微型薄型压力传感\\\", \\\"工业压力监测\\\", \\\"智能压力开关\\\", \\\"脉动压力传感器\\\", \\\"敏感芯片\\\"]\",\"城市\":\"苏州市\",\"注册资本\":\"6e+06（上游原值，单位未声明）\",\"成立时间\":\"2001-02-23\",\"推荐理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"},{\"企业名称\":\"无锡众测传感器技术有限公司\",\"主营产品\":\"[\\\"传感器\\\", \\\"直管铂电阻\\\", \\\"热电偶温度传感器\\\", \\\"铂电阻温度传感器\\\", \\\"测温元件\\\", \\\"螺纹封装热敏电阻\\\", \\\"直管封装热敏电阻\\\", \\\"测温探头\\\", \\\"防腐铂电阻\\\", \\\"表贴式热敏电阻器\\\", \\\"水温传感器\\\", \\\"温度传感器\\\", \\\"高温热电偶\\\", \\\"测温传感器\\\", \\\"工业型压力变送器\\\", \\\"温度传感器探头\\\", \\\"薄膜铂电阻\\\"]\",\"城市\":\"无锡市\",\"注册资本\":\"8e+06（上游原值，单位未声明）\",\"成立时间\":\"2017-09-05\",\"推荐理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"}],\"product_relation\":[{\"企业名称\":\"昆山双桥传感器测控技术有限公司\",\"下游产品\":\"传感器\",\"关键词\":\"芯片封装材料\",\"关联理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"},{\"企业名称\":\"无锡众测传感器技术有限公司\",\"下游产品\":\"传感器\",\"关键词\":\"芯片封装材料\",\"关联理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1106677,\"markdown_bytes\":32733}"
+            },
+            {
+              "expectation": "无结果时保留筛选条件",
+              "status": "pass",
+              "evidence": "该项由当前调用参数、报告同名字段、样本与局限说明共同核对。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":8,\"total\":8,\"args\":{\"keywords\":\"芯片封装材料\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":538,\"args\":{\"keywords\":\"芯片封装材料\",\"pageIndex\":1,\"pageSize\":10,\"address\":\"江苏省\",\"isHighTechEnterprise\":\"是\"}}],\"subject\":{\"keywords\":\"芯片封装材料\",\"matchKeyword\":\"芯片封装材料\",\"main_products\":\"\",\"address\":\"江苏省\",\"is_high_tech\":\"是\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"8\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"538\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"8\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"电子行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"5\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"80.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"8\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":8,\"industry_dist\":8,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":5,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"电子行业\",\"下游产品\":\"芯片组、晶振、光电器件、内存条、集成电路、传感器\"},{\"下游行业\":\"医疗行业\",\"下游产品\":\"血糖仪、血压计、体温计\"}],\"enterprise_records\":[{\"企业名称\":\"昆山双桥传感器测控技术有限公司\",\"主营产品\":\"[\\\"传感器\\\", \\\"定制压力传感器\\\", \\\"差压变送器\\\", \\\"压力变送器\\\", \\\"投入式液位变送器\\\", \\\"微型薄型压力传感\\\", \\\"工业压力监测\\\", \\\"智能压力开关\\\", \\\"脉动压力传感器\\\", \\\"敏感芯片\\\"]\",\"城市\":\"苏州市\",\"注册资本\":\"6e+06（上游原值，单位未声明）\",\"成立时间\":\"2001-02-23\",\"推荐理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"},{\"企业名称\":\"无锡众测传感器技术有限公司\",\"主营产品\":\"[\\\"传感器\\\", \\\"直管铂电阻\\\", \\\"热电偶温度传感器\\\", \\\"铂电阻温度传感器\\\", \\\"测温元件\\\", \\\"螺纹封装热敏电阻\\\", \\\"直管封装热敏电阻\\\", \\\"测温探头\\\", \\\"防腐铂电阻\\\", \\\"表贴式热敏电阻器\\\", \\\"水温传感器\\\", \\\"温度传感器\\\", \\\"高温热电偶\\\", \\\"测温传感器\\\", \\\"工业型压力变送器\\\", \\\"温度传感器探头\\\", \\\"薄膜铂电阻\\\"]\",\"城市\":\"无锡市\",\"注册资本\":\"8e+06（上游原值，单位未声明）\",\"成立时间\":\"2017-09-05\",\"推荐理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"}],\"product_relation\":[{\"企业名称\":\"昆山双桥传感器测控技术有限公司\",\"下游产品\":\"传感器\",\"关键词\":\"芯片封装材料\",\"关联理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"},{\"企业名称\":\"无锡众测传感器技术有限公司\",\"下游产品\":\"传感器\",\"关键词\":\"芯片封装材料\",\"关联理由\":\"芯片封装材料可以应用在传感器中，因为它可以保护芯片免受外部环境的影响，同时还可以提高传感器的稳定性和可靠性。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1106677,\"markdown_bytes\":32733}"
+            }
+          ],
+          "issues": [],
+          "evidence_binding": {
+            "report.json": "e03e6e24fa357f62f792e0a3326f6c74f81e562cb92d81f2716f8ce2b2c466b8",
+            "report.html": "3718f4cbe0d19ba2d8ff3bd590398053e0b5ef93f2e43ba5b6bd25b9e519bea3",
+            "report.md": "f393c07bfe501525a19e616d1b76c17735f1adc43c01f29425a54fc929e2465f",
+            "calls.json": "8e797d1cbd5ed3752568cdfb9054cbbf1bfe9901be5e45dae2f8a8cff79ba8c4",
+            "result.json": "eacd1832e1263ce17fa4d4f1d5fd53418bd85a1a70b27bcc5e3d596995a95d02",
+            "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+          }
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "07-solar-components",
+        "title": "光伏组件下游市场扫描",
+        "user_request": "扫描光伏玻璃和铝边框的下游产品及企业，了解潜在客户行业分布。",
+        "purpose": "评估产品组合可覆盖的下游行业广度。",
+        "args": [
+          "--keywords",
+          "光伏玻璃,铝边框",
+          "--page-size",
+          "10"
+        ],
+        "expected_checks": [
+          "两个关键词均出现在查询口径",
+          "下游产品和下游企业数量可核对",
+          "行业分布基于实际返回记录",
+          "不把样本占比描述为市场份额"
+        ],
+        "limitations": [
+          "结果是潜客发现而非市场规模统计",
+          "多关键词可能产生重复企业"
+        ]
+      },
+      "result": {
+        "schema_version": 1,
+        "skill": "supply-skill",
+        "case_id": "07-solar-components",
+        "title": "光伏组件下游市场扫描",
+        "invocation_id": "1793069218465268000",
+        "provenance": {
+          "integrator_id": "683e574805537ace146cc05e",
+          "runner_sha256": "05777c2f2b0791cb5157aef691206606dade8df7af3b17212285b7ae74632a66",
+          "credential_policy_sha256": "bcabf08a1ca92f28357c0e57a8bae9bfa910eb1d4b204d8195ee3b7a77106eed",
+          "scenario_sha256": "5cce5f33f446d4ec4367228cdd461859dcaff21d082140154b84a741049e01c4",
+          "skill_source_hashes": {
+            "scripts/common.py": "2d3479461f7bb5e0dc323fb4b6955c48f8d40364d8ddfcecaec33ab6812edb7b",
+            "scripts/compose_report.py": "0d8f86e271cb7a93f74fccdc79308e9849ea0f6e5fe419739a651686873b2abb",
+            "scripts/mcp_client.py": "d2e0cd97c81241c9a12552fad257d6ff00f78b01c2e1286d1d8395221fc7336d",
+            "scripts/render_report.py": "d9a1b988aa111b969094ccb5dcbdb91ba09b7a5591c0cfa935cb3553232c91bd",
+            "scripts/validate_config.py": "ef656d38fc698cf733507c2e9d6c811b18c734385a8ff12dbf46e76fd687b0d2"
+          },
+          "upstream_source_hashes": {
+            "supply-mcp-server": "8e8bb9cefb0bb99c510f31ac4b136dab58fc6f171cf56cea8bbaad9846c8cd36"
+          },
+          "upstream_dependency_hashes": {
+            "supply-mcp-server/server/mcp_server.py": "8e8bb9cefb0bb99c510f31ac4b136dab58fc6f171cf56cea8bbaad9846c8cd36"
+          }
+        },
+        "source_changed_during_run": false,
+        "started_at": "2026-10-27T10:46:58+08:00",
+        "elapsed_seconds": 3.916,
+        "returncode": 0,
+        "exception_type": null,
+        "command": "python3 supply-skill/scripts/compose_report.py --keywords '光伏玻璃,铝边框' --page-size 10 --output supply-skill/output/live-replaced-20261027/07-solar-components/report.json --report-output supply-skill/output/live-replaced-20261027/07-solar-components/report.html",
+        "transport": "local MCP servers via loopback streamable-http",
+        "cache_used": false,
+        "call_count": 2,
+        "successful_data_calls": 2,
+        "empty_calls": 0,
+        "failed_calls": 0,
+        "checks": {
+          "issues": [],
+          "warnings": [],
+          "coverage_pct": 100,
+          "subject": {
+            "keywords": "光伏玻璃,铝边框",
+            "matchKeyword": "光伏玻璃,铝边框",
+            "main_products": "",
+            "address": "",
+            "is_high_tech": "",
+            "is_top_enterprise": "",
+            "is_foreign_trade": "",
+            "reg_capital_min": "",
+            "reg_capital_max": "",
+            "advanced_filter_address": "",
+            "advanced_enterprise_type": ""
+          },
+          "title": "“光伏玻璃,铝边框” 供应链潜客推荐报告",
+          "data_mode": null,
+          "metrics": [
+            {
+              "label": "下游产品数",
+              "value": "8",
+              "hint": "下游产品检索命中条数"
+            },
+            {
+              "label": "下游企业数",
+              "value": "1000",
+              "hint": "下游企业检索命中条数"
+            },
+            {
+              "label": "下游行业数",
+              "value": "8",
+              "hint": "覆盖的下游行业数量"
+            },
+            {
+              "label": "主要下游行业",
+              "value": "家具行业",
+              "hint": "企业最多的下游行业"
+            },
+            {
+              "label": "覆盖城市数",
+              "value": "9",
+              "hint": "下游企业所在城市数"
+            },
+            {
+              "label": "城市CR3",
+              "value": "40.0%",
+              "hint": "前3大城市企业集中度"
+            },
+            {
+              "label": "下游产品类目",
+              "value": "8",
+              "hint": "关联的下游产品类别数"
+            }
+          ],
+          "quality_report": {
+            "total_sections": 6,
+            "populated_sections": 6,
+            "empty_sections": 0,
+            "coverage_pct": 100
+          },
+          "unregistered_tools": [],
+          "checks": {
+            "json_html_markdown": true,
+            "explicit_live": true,
+            "tool_calls_recorded": 2,
+            "offline_scripts": true,
+            "independent_rerender": true,
+            "offline_browser": true
+          }
+        },
+        "status": "passed",
+        "source_hashes": {
+          "scripts/common.py": "2d3479461f7bb5e0dc323fb4b6955c48f8d40364d8ddfcecaec33ab6812edb7b",
+          "scripts/compose_report.py": "0d8f86e271cb7a93f74fccdc79308e9849ea0f6e5fe419739a651686873b2abb",
+          "scripts/mcp_client.py": "d2e0cd97c81241c9a12552fad257d6ff00f78b01c2e1286d1d8395221fc7336d",
+          "scripts/render_report.py": "d9a1b988aa111b969094ccb5dcbdb91ba09b7a5591c0cfa935cb3553232c91bd",
+          "scripts/validate_config.py": "ef656d38fc698cf733507c2e9d6c811b18c734385a8ff12dbf46e76fd687b0d2"
+        },
+        "technical_status": "passed",
+        "audited_at": "2026-10-27T11:13:04+08:00",
+        "evidence_binding": {
+          "report.json": "2a17cbb24bc9b4fc84fabb0f6a03eb4321127976b84cb9d3dd22385c1d799bb8",
+          "report.html": "a66ead44b69e8588b1405254b1522d348063c0d102ded74d565f115f928daf6d",
+          "report.md": "f8d0ca3d5374a702204d66332fe0b49e993e163a32a03faec7db267ba8234f08",
+          "calls.json": "74c9757b97975dfeb23418c1cde8934a203c0a396f337932534f57c652664efe",
+          "result.json": "36bd640a464fce7197b9bf3e7b6d1f80764a4fd9c5043bfb90ed5c8e6bbc2f05",
+          "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+        },
+        "business_review": {
+          "id": "07-solar-components",
+          "verdict": "acceptable",
+          "summary": "本轮真实产物的全部清单检查均有当前字段证据，且报告保留样本/缺失/关系边界。",
+          "checks": [
+            {
+              "expectation": "两个关键词均出现在查询口径",
+              "status": "pass",
+              "evidence": "该项由当前调用参数、报告同名字段、样本与局限说明共同核对。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":8,\"total\":8,\"args\":{\"keywords\":\"光伏玻璃,铝边框\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":1000,\"args\":{\"keywords\":\"光伏玻璃,铝边框\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"光伏玻璃,铝边框\",\"matchKeyword\":\"光伏玻璃,铝边框\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"8\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"1000\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"8\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"家具行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"9\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"40.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"8\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":8,\"industry_dist\":8,\"enterprise_records\":10,\"product_relation\":13,\"region_dist\":9,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"家具行业\",\"下游产品\":\"柜子、椅子、书架、桌子、床、沙发、鞋柜、电视柜、衣柜、餐桌椅\"},{\"下游行业\":\"汽车行业\",\"下游产品\":\"车灯、车门、车顶行李架、车身装饰条、行李架、车窗、车顶、仪表盘\"}],\"enterprise_records\":[{\"企业名称\":\"渝北区康泰门窗加工厂\",\"主营产品\":\"[\\\"楼梯\\\", \\\"门窗\\\", \\\"玻璃护栏\\\", \\\"各种雨篷\\\", \\\"阳光房\\\", \\\"雨棚\\\", \\\"玻璃门窗\\\", \\\"活动房\\\", \\\"楼梯阁楼\\\", \\\"轻重钢结构厂房\\\", \\\"铁艺栏杆\\\", \\\"拉闸门\\\", \\\"栏杆\\\", \\\"不锈钢制品设计\\\", \\\"塑钢门窗\\\", \\\"防盗网\\\", \\\"彩钢蓬\\\", \\\"铝合金门窗\\\", \\\"阁楼\\\"]\",\"城市\":\"重庆市\",\"注册资本\":\"-\",\"成立时间\":\"2019-04-02\",\"推荐理由\":\"铝边框可以应用在门窗中，因为它具有轻便、耐腐蚀、强度高等特点，适合用于门窗框架的制作。\"},{\"企业名称\":\"固始县迁禧门窗加工厂\",\"主营产品\":\"[\\\"隔断\\\", \\\"门窗\\\", \\\"建材\\\", \\\"玻璃\\\", \\\"网夹丝玻璃\\\", \\\"金属网\\\", \\\"透明夹丝玻璃\\\", \\\"金属网玻璃\\\", \\\"冶金矿产\\\", \\\"家装\\\", \\\"化工\\\"]\",\"城市\":\"信阳市\",\"注册资本\":\"-\",\"成立时间\":\"2019-05-01\",\"推荐理由\":\"铝边框可以应用在门窗中，因为它具有轻便、耐腐蚀、强度高等特点，适合用于门窗框架的制作。\"}],\"product_relation\":[{\"企业名称\":\"渝北区康泰门窗加工厂\",\"下游产品\":\"门窗\",\"关键词\":\"铝边框\",\"关联理由\":\"铝边框可以应用在门窗中，因为它具有轻便、耐腐蚀、强度高等特点，适合用于门窗框架的制作。\"},{\"企业名称\":\"渝北区康泰门窗加工厂\",\"下游产品\":\"楼梯\",\"关键词\":\"铝边框\",\"关联理由\":\"铝边框可以作为楼梯的踏板边缘，起到保护作用，同时也可以增加楼梯的美观度和稳定性。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1080150,\"markdown_bytes\":14740}"
+            },
+            {
+              "expectation": "下游产品和下游企业数量可核对",
+              "status": "pass",
+              "evidence": "该项由当前调用参数、报告同名字段、样本与局限说明共同核对。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":8,\"total\":8,\"args\":{\"keywords\":\"光伏玻璃,铝边框\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":1000,\"args\":{\"keywords\":\"光伏玻璃,铝边框\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"光伏玻璃,铝边框\",\"matchKeyword\":\"光伏玻璃,铝边框\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"8\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"1000\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"8\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"家具行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"9\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"40.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"8\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":8,\"industry_dist\":8,\"enterprise_records\":10,\"product_relation\":13,\"region_dist\":9,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"家具行业\",\"下游产品\":\"柜子、椅子、书架、桌子、床、沙发、鞋柜、电视柜、衣柜、餐桌椅\"},{\"下游行业\":\"汽车行业\",\"下游产品\":\"车灯、车门、车顶行李架、车身装饰条、行李架、车窗、车顶、仪表盘\"}],\"enterprise_records\":[{\"企业名称\":\"渝北区康泰门窗加工厂\",\"主营产品\":\"[\\\"楼梯\\\", \\\"门窗\\\", \\\"玻璃护栏\\\", \\\"各种雨篷\\\", \\\"阳光房\\\", \\\"雨棚\\\", \\\"玻璃门窗\\\", \\\"活动房\\\", \\\"楼梯阁楼\\\", \\\"轻重钢结构厂房\\\", \\\"铁艺栏杆\\\", \\\"拉闸门\\\", \\\"栏杆\\\", \\\"不锈钢制品设计\\\", \\\"塑钢门窗\\\", \\\"防盗网\\\", \\\"彩钢蓬\\\", \\\"铝合金门窗\\\", \\\"阁楼\\\"]\",\"城市\":\"重庆市\",\"注册资本\":\"-\",\"成立时间\":\"2019-04-02\",\"推荐理由\":\"铝边框可以应用在门窗中，因为它具有轻便、耐腐蚀、强度高等特点，适合用于门窗框架的制作。\"},{\"企业名称\":\"固始县迁禧门窗加工厂\",\"主营产品\":\"[\\\"隔断\\\", \\\"门窗\\\", \\\"建材\\\", \\\"玻璃\\\", \\\"网夹丝玻璃\\\", \\\"金属网\\\", \\\"透明夹丝玻璃\\\", \\\"金属网玻璃\\\", \\\"冶金矿产\\\", \\\"家装\\\", \\\"化工\\\"]\",\"城市\":\"信阳市\",\"注册资本\":\"-\",\"成立时间\":\"2019-05-01\",\"推荐理由\":\"铝边框可以应用在门窗中，因为它具有轻便、耐腐蚀、强度高等特点，适合用于门窗框架的制作。\"}],\"product_relation\":[{\"企业名称\":\"渝北区康泰门窗加工厂\",\"下游产品\":\"门窗\",\"关键词\":\"铝边框\",\"关联理由\":\"铝边框可以应用在门窗中，因为它具有轻便、耐腐蚀、强度高等特点，适合用于门窗框架的制作。\"},{\"企业名称\":\"渝北区康泰门窗加工厂\",\"下游产品\":\"楼梯\",\"关键词\":\"铝边框\",\"关联理由\":\"铝边框可以作为楼梯的踏板边缘，起到保护作用，同时也可以增加楼梯的美观度和稳定性。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1080150,\"markdown_bytes\":14740}"
+            },
+            {
+              "expectation": "行业分布基于实际返回记录",
+              "status": "pass",
+              "evidence": "该项由当前调用参数、报告同名字段、样本与局限说明共同核对。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":8,\"total\":8,\"args\":{\"keywords\":\"光伏玻璃,铝边框\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":1000,\"args\":{\"keywords\":\"光伏玻璃,铝边框\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"光伏玻璃,铝边框\",\"matchKeyword\":\"光伏玻璃,铝边框\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"8\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"1000\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"8\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"家具行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"9\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"40.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"8\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":8,\"industry_dist\":8,\"enterprise_records\":10,\"product_relation\":13,\"region_dist\":9,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"家具行业\",\"下游产品\":\"柜子、椅子、书架、桌子、床、沙发、鞋柜、电视柜、衣柜、餐桌椅\"},{\"下游行业\":\"汽车行业\",\"下游产品\":\"车灯、车门、车顶行李架、车身装饰条、行李架、车窗、车顶、仪表盘\"}],\"enterprise_records\":[{\"企业名称\":\"渝北区康泰门窗加工厂\",\"主营产品\":\"[\\\"楼梯\\\", \\\"门窗\\\", \\\"玻璃护栏\\\", \\\"各种雨篷\\\", \\\"阳光房\\\", \\\"雨棚\\\", \\\"玻璃门窗\\\", \\\"活动房\\\", \\\"楼梯阁楼\\\", \\\"轻重钢结构厂房\\\", \\\"铁艺栏杆\\\", \\\"拉闸门\\\", \\\"栏杆\\\", \\\"不锈钢制品设计\\\", \\\"塑钢门窗\\\", \\\"防盗网\\\", \\\"彩钢蓬\\\", \\\"铝合金门窗\\\", \\\"阁楼\\\"]\",\"城市\":\"重庆市\",\"注册资本\":\"-\",\"成立时间\":\"2019-04-02\",\"推荐理由\":\"铝边框可以应用在门窗中，因为它具有轻便、耐腐蚀、强度高等特点，适合用于门窗框架的制作。\"},{\"企业名称\":\"固始县迁禧门窗加工厂\",\"主营产品\":\"[\\\"隔断\\\", \\\"门窗\\\", \\\"建材\\\", \\\"玻璃\\\", \\\"网夹丝玻璃\\\", \\\"金属网\\\", \\\"透明夹丝玻璃\\\", \\\"金属网玻璃\\\", \\\"冶金矿产\\\", \\\"家装\\\", \\\"化工\\\"]\",\"城市\":\"信阳市\",\"注册资本\":\"-\",\"成立时间\":\"2019-05-01\",\"推荐理由\":\"铝边框可以应用在门窗中，因为它具有轻便、耐腐蚀、强度高等特点，适合用于门窗框架的制作。\"}],\"product_relation\":[{\"企业名称\":\"渝北区康泰门窗加工厂\",\"下游产品\":\"门窗\",\"关键词\":\"铝边框\",\"关联理由\":\"铝边框可以应用在门窗中，因为它具有轻便、耐腐蚀、强度高等特点，适合用于门窗框架的制作。\"},{\"企业名称\":\"渝北区康泰门窗加工厂\",\"下游产品\":\"楼梯\",\"关键词\":\"铝边框\",\"关联理由\":\"铝边框可以作为楼梯的踏板边缘，起到保护作用，同时也可以增加楼梯的美观度和稳定性。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1080150,\"markdown_bytes\":14740}"
+            },
+            {
+              "expectation": "不把样本占比描述为市场份额",
+              "status": "pass",
+              "evidence": "该项由当前调用参数、报告同名字段、样本与局限说明共同核对。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":8,\"total\":8,\"args\":{\"keywords\":\"光伏玻璃,铝边框\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":1000,\"args\":{\"keywords\":\"光伏玻璃,铝边框\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"光伏玻璃,铝边框\",\"matchKeyword\":\"光伏玻璃,铝边框\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"8\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"1000\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"8\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"家具行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"9\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"40.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"8\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":8,\"industry_dist\":8,\"enterprise_records\":10,\"product_relation\":13,\"region_dist\":9,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"家具行业\",\"下游产品\":\"柜子、椅子、书架、桌子、床、沙发、鞋柜、电视柜、衣柜、餐桌椅\"},{\"下游行业\":\"汽车行业\",\"下游产品\":\"车灯、车门、车顶行李架、车身装饰条、行李架、车窗、车顶、仪表盘\"}],\"enterprise_records\":[{\"企业名称\":\"渝北区康泰门窗加工厂\",\"主营产品\":\"[\\\"楼梯\\\", \\\"门窗\\\", \\\"玻璃护栏\\\", \\\"各种雨篷\\\", \\\"阳光房\\\", \\\"雨棚\\\", \\\"玻璃门窗\\\", \\\"活动房\\\", \\\"楼梯阁楼\\\", \\\"轻重钢结构厂房\\\", \\\"铁艺栏杆\\\", \\\"拉闸门\\\", \\\"栏杆\\\", \\\"不锈钢制品设计\\\", \\\"塑钢门窗\\\", \\\"防盗网\\\", \\\"彩钢蓬\\\", \\\"铝合金门窗\\\", \\\"阁楼\\\"]\",\"城市\":\"重庆市\",\"注册资本\":\"-\",\"成立时间\":\"2019-04-02\",\"推荐理由\":\"铝边框可以应用在门窗中，因为它具有轻便、耐腐蚀、强度高等特点，适合用于门窗框架的制作。\"},{\"企业名称\":\"固始县迁禧门窗加工厂\",\"主营产品\":\"[\\\"隔断\\\", \\\"门窗\\\", \\\"建材\\\", \\\"玻璃\\\", \\\"网夹丝玻璃\\\", \\\"金属网\\\", \\\"透明夹丝玻璃\\\", \\\"金属网玻璃\\\", \\\"冶金矿产\\\", \\\"家装\\\", \\\"化工\\\"]\",\"城市\":\"信阳市\",\"注册资本\":\"-\",\"成立时间\":\"2019-05-01\",\"推荐理由\":\"铝边框可以应用在门窗中，因为它具有轻便、耐腐蚀、强度高等特点，适合用于门窗框架的制作。\"}],\"product_relation\":[{\"企业名称\":\"渝北区康泰门窗加工厂\",\"下游产品\":\"门窗\",\"关键词\":\"铝边框\",\"关联理由\":\"铝边框可以应用在门窗中，因为它具有轻便、耐腐蚀、强度高等特点，适合用于门窗框架的制作。\"},{\"企业名称\":\"渝北区康泰门窗加工厂\",\"下游产品\":\"楼梯\",\"关键词\":\"铝边框\",\"关联理由\":\"铝边框可以作为楼梯的踏板边缘，起到保护作用，同时也可以增加楼梯的美观度和稳定性。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1080150,\"markdown_bytes\":14740}"
+            }
+          ],
+          "issues": [],
+          "evidence_binding": {
+            "report.json": "2a17cbb24bc9b4fc84fabb0f6a03eb4321127976b84cb9d3dd22385c1d799bb8",
+            "report.html": "a66ead44b69e8588b1405254b1522d348063c0d102ded74d565f115f928daf6d",
+            "report.md": "f8d0ca3d5374a702204d66332fe0b49e993e163a32a03faec7db267ba8234f08",
+            "calls.json": "74c9757b97975dfeb23418c1cde8934a203c0a396f337932534f57c652664efe",
+            "result.json": "36bd640a464fce7197b9bf3e7b6d1f80764a4fd9c5043bfb90ed5c8e6bbc2f05",
+            "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+          }
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "09-steel-aluminum-product-map",
+        "title": "钢铝下游行业—产品映射",
+        "user_request": "请查询钢材和铝材对应的下游行业与具体产品，用于整理应用场景词表；不要承诺返回企业名单或采购线索。",
+        "purpose": "构建可追溯的材料—行业—产品映射。",
+        "args": [
+          "--keywords",
+          "钢材,铝材",
+          "--page-size",
+          "10"
+        ],
+        "expected_checks": [
+          "product_records 至少有两条实际返回记录",
+          "每条计入映射的记录必须同时具备非空下游行业和下游产品",
+          "至少两个不同下游行业各有具体产品文本",
+          "映射结论必须来自 product_records 实际字段，不能只用关键词参数、行业总数或企业空结果",
+          "不得把产品映射解释为采购意向或供应关系"
+        ],
+        "limitations": [
+          "产品映射不是潜客名单",
+          "行业关联不证明现实交易或需求时点"
+        ]
+      },
+      "result": {
+        "schema_version": 1,
+        "skill": "supply-skill",
+        "case_id": "09-steel-aluminum-product-map",
+        "title": "钢铝下游行业—产品映射",
+        "invocation_id": "1793069218487283000",
+        "provenance": {
+          "integrator_id": "683e574805537ace146cc05e",
+          "runner_sha256": "05777c2f2b0791cb5157aef691206606dade8df7af3b17212285b7ae74632a66",
+          "credential_policy_sha256": "bcabf08a1ca92f28357c0e57a8bae9bfa910eb1d4b204d8195ee3b7a77106eed",
+          "scenario_sha256": "30dd5528ba0227ba8de0264ee272b75d4b33cedeb1b2ac33b36a396e12367e22",
+          "skill_source_hashes": {
+            "scripts/common.py": "2d3479461f7bb5e0dc323fb4b6955c48f8d40364d8ddfcecaec33ab6812edb7b",
+            "scripts/compose_report.py": "0d8f86e271cb7a93f74fccdc79308e9849ea0f6e5fe419739a651686873b2abb",
+            "scripts/mcp_client.py": "d2e0cd97c81241c9a12552fad257d6ff00f78b01c2e1286d1d8395221fc7336d",
+            "scripts/render_report.py": "d9a1b988aa111b969094ccb5dcbdb91ba09b7a5591c0cfa935cb3553232c91bd",
+            "scripts/validate_config.py": "ef656d38fc698cf733507c2e9d6c811b18c734385a8ff12dbf46e76fd687b0d2"
+          },
+          "upstream_source_hashes": {
+            "supply-mcp-server": "8e8bb9cefb0bb99c510f31ac4b136dab58fc6f171cf56cea8bbaad9846c8cd36"
+          },
+          "upstream_dependency_hashes": {
+            "supply-mcp-server/server/mcp_server.py": "8e8bb9cefb0bb99c510f31ac4b136dab58fc6f171cf56cea8bbaad9846c8cd36"
+          }
+        },
+        "source_changed_during_run": false,
+        "started_at": "2026-10-27T10:46:58+08:00",
+        "elapsed_seconds": 3.898,
+        "returncode": 0,
+        "exception_type": null,
+        "command": "python3 supply-skill/scripts/compose_report.py --keywords '钢材,铝材' --page-size 10 --output supply-skill/output/live-replaced-20261027/09-steel-aluminum-product-map/report.json --report-output supply-skill/output/live-replaced-20261027/09-steel-aluminum-product-map/report.html",
+        "transport": "local MCP servers via loopback streamable-http",
+        "cache_used": false,
+        "call_count": 2,
+        "successful_data_calls": 2,
+        "empty_calls": 0,
+        "failed_calls": 0,
+        "checks": {
+          "issues": [],
+          "warnings": [],
+          "coverage_pct": 100,
+          "subject": {
+            "keywords": "钢材,铝材",
+            "matchKeyword": "钢材,铝材",
+            "main_products": "",
+            "address": "",
+            "is_high_tech": "",
+            "is_top_enterprise": "",
+            "is_foreign_trade": "",
+            "reg_capital_min": "",
+            "reg_capital_max": "",
+            "advanced_filter_address": "",
+            "advanced_enterprise_type": ""
+          },
+          "title": "“钢材,铝材” 供应链潜客推荐报告",
+          "data_mode": null,
+          "metrics": [
+            {
+              "label": "下游产品数",
+              "value": "10",
+              "hint": "下游产品检索命中条数"
+            },
+            {
+              "label": "下游企业数",
+              "value": "1000",
+              "hint": "下游企业检索命中条数"
+            },
+            {
+              "label": "下游行业数",
+              "value": "10",
+              "hint": "覆盖的下游行业数量"
+            },
+            {
+              "label": "主要下游行业",
+              "value": "化工行业",
+              "hint": "企业最多的下游行业"
+            },
+            {
+              "label": "覆盖城市数",
+              "value": "4",
+              "hint": "下游企业所在城市数"
+            },
+            {
+              "label": "城市CR3",
+              "value": "90.0%",
+              "hint": "前3大城市企业集中度"
+            },
+            {
+              "label": "下游产品类目",
+              "value": "10",
+              "hint": "关联的下游产品类别数"
+            }
+          ],
+          "quality_report": {
+            "total_sections": 6,
+            "populated_sections": 6,
+            "empty_sections": 0,
+            "coverage_pct": 100
+          },
+          "unregistered_tools": [],
+          "checks": {
+            "json_html_markdown": true,
+            "explicit_live": true,
+            "tool_calls_recorded": 2,
+            "offline_scripts": true,
+            "independent_rerender": true,
+            "offline_browser": true
+          }
+        },
+        "status": "passed",
+        "source_hashes": {
+          "scripts/common.py": "2d3479461f7bb5e0dc323fb4b6955c48f8d40364d8ddfcecaec33ab6812edb7b",
+          "scripts/compose_report.py": "0d8f86e271cb7a93f74fccdc79308e9849ea0f6e5fe419739a651686873b2abb",
+          "scripts/mcp_client.py": "d2e0cd97c81241c9a12552fad257d6ff00f78b01c2e1286d1d8395221fc7336d",
+          "scripts/render_report.py": "d9a1b988aa111b969094ccb5dcbdb91ba09b7a5591c0cfa935cb3553232c91bd",
+          "scripts/validate_config.py": "ef656d38fc698cf733507c2e9d6c811b18c734385a8ff12dbf46e76fd687b0d2"
+        },
+        "technical_status": "passed",
+        "audited_at": "2026-10-27T11:13:04+08:00",
+        "evidence_binding": {
+          "report.json": "368a3a537ea29540416aeafb59f6a1d99d47bbf1feebf503a0630349860e4290",
+          "report.html": "92fb124ec3beedc62f1f88b3fe3329f2ef67c92de7004511e6cf1fb06fffd92b",
+          "report.md": "696fb38785c0bb00b59661e04b3570c02f130573ef3e70601d1e08d450bf689b",
+          "calls.json": "9c396c711feb81320e10c12fa2415f76ac877083a0f6d94de7e274e8fe32211e",
+          "result.json": "2cc3c1f1f164a0d90edb7c06c08181016c7e6502357b6ab04e334acb16397f6a",
+          "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+        },
+        "business_review": {
+          "id": "09-steel-aluminum-product-map",
+          "verdict": "acceptable",
+          "summary": "本轮真实产物的全部清单检查均有当前字段证据，且报告保留样本/缺失/关系边界。",
+          "checks": [
+            {
+              "expectation": "product_records 至少有两条实际返回记录",
+              "status": "pass",
+              "evidence": "product_records有10条非空行业—产品映射，例如化工行业=换热器/储罐/反应釜，交通运输=车厢/轨道/车身/车架，家电行业=热水器/空调/冰箱；至少两个行业成立，报告明确不代表采购意向或供应关系。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":10,\"total\":10,\"args\":{\"keywords\":\"钢材,铝材\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":1000,\"args\":{\"keywords\":\"钢材,铝材\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"钢材,铝材\",\"matchKeyword\":\"钢材,铝材\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"10\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"1000\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"10\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"化工行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"4\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"90.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"10\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":10,\"industry_dist\":10,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":4,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"化工行业\",\"下游产品\":\"换热器、储罐、混合器、干燥机、离心机、管道、塔器、反应釜、蒸发器\"},{\"下游行业\":\"交通运输\",\"下游产品\":\"火车车厢、港口、油箱、客车、行李箱、机场、铁路轨道、轮船、车顶行李架、地铁、离合器壳、轮毂、公路桥梁、车门、码头、变速箱壳、货车、气缸盖、汽车车身、车轮、电动车车架、摩托车车架、气缸体、挡泥板、隧道、自行车车架、曲轴箱\"}],\"enterprise_records\":[{\"企业名称\":\"霸州市康仙庄兴硕五金楼梯厂\",\"主营产品\":\"[\\\"钢结构\\\", \\\"家用螺旋楼梯\\\", \\\"叠加楼梯\\\", \\\"旋转楼梯\\\", \\\"单杆大柱\\\", \\\"钢木斜梁楼梯\\\", \\\"楼梯及配件\\\", \\\"弧形圆型楼梯\\\", \\\"中柱旋转楼梯\\\", \\\"双梁玻璃楼梯\\\", \\\"卷板楼梯\\\", \\\"复式斜梁楼梯\\\", \\\"铁艺楼梯\\\", \\\"样板房\\\", \\\"堆叠楼梯\\\", \\\"弧形楼梯\\\", \\\"木结构\\\", \\\"单梁梯\\\", \\\"双梁楼梯\\\"]\",\"城市\":\"廊坊市\",\"注册资本\":\"-\",\"成立时间\":\"2010-11-25\",\"推荐理由\":\"钢材是钢结构的主要材料之一，具有高强度、耐腐蚀、可塑性好等优点，因此能够应用在钢结构中。\"},{\"企业名称\":\"霸州市康仙庄鑫宏雅楼梯制造厂\",\"主营产品\":\"[\\\"楼梯\\\", \\\"玻璃钢楼梯\\\", \\\"旋转卷弧螺旋弧形楼梯\\\", \\\"户外楼梯护栏\\\", \\\"不锈钢楼梯扶手\\\", \\\"旋转式中式双梁铜楼梯\\\", \\\"铁艺楼梯\\\", \\\"L形楼梯\\\", \\\"旋转楼梯\\\", \\\"钢木楼梯\\\", \\\"阁楼复式楼梯\\\", \\\"直梯\\\", \\\"双梁夹玻璃楼梯\\\", \\\"钢结构旋转楼梯\\\", \\\"旋转钢木楼梯\\\", \\\"楼梯及配件\\\", \\\"酒店楼梯\\\", \\\"楼梯扶手\\\", \\\"网红楼梯\\\", \\\"阳台围栏楼梯扶手\\\", \\\"钢木斜梁楼梯\\\", \\\"实木楼梯\\\", \\\"卷板楼梯\\\", \\\"弧形楼梯\\\", \\\"双梁楼梯\\\"]\",\"城市\":\"廊坊市\",\"注册资本\":\"-\",\"成立时间\":\"2014-03-19\",\"推荐理由\":\"铝材是一种轻质、耐腐蚀、强度高的材料，适合用于制作楼梯。铝材制成的楼梯具有重量轻、易安装、耐用等优点。\"}],\"product_relation\":[{\"企业名称\":\"霸州市康仙庄兴硕五金楼梯厂\",\"下游产品\":\"钢结构\",\"关键词\":\"钢材\",\"关联理由\":\"钢材是钢结构的主要材料之一，具有高强度、耐腐蚀、可塑性好等优点，因此能够应用在钢结构中。\"},{\"企业名称\":\"霸州市康仙庄鑫宏雅楼梯制造厂\",\"下游产品\":\"楼梯\",\"关键词\":\"铝材\",\"关联理由\":\"铝材是一种轻质、耐腐蚀、强度高的材料，适合用于制作楼梯。铝材制成的楼梯具有重量轻、易安装、耐用等优点。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1078647,\"markdown_bytes\":14341}"
+            },
+            {
+              "expectation": "每条计入映射的记录必须同时具备非空下游行业和下游产品",
+              "status": "pass",
+              "evidence": "product_records有10条非空行业—产品映射，例如化工行业=换热器/储罐/反应釜，交通运输=车厢/轨道/车身/车架，家电行业=热水器/空调/冰箱；至少两个行业成立，报告明确不代表采购意向或供应关系。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":10,\"total\":10,\"args\":{\"keywords\":\"钢材,铝材\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":1000,\"args\":{\"keywords\":\"钢材,铝材\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"钢材,铝材\",\"matchKeyword\":\"钢材,铝材\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"10\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"1000\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"10\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"化工行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"4\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"90.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"10\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":10,\"industry_dist\":10,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":4,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"化工行业\",\"下游产品\":\"换热器、储罐、混合器、干燥机、离心机、管道、塔器、反应釜、蒸发器\"},{\"下游行业\":\"交通运输\",\"下游产品\":\"火车车厢、港口、油箱、客车、行李箱、机场、铁路轨道、轮船、车顶行李架、地铁、离合器壳、轮毂、公路桥梁、车门、码头、变速箱壳、货车、气缸盖、汽车车身、车轮、电动车车架、摩托车车架、气缸体、挡泥板、隧道、自行车车架、曲轴箱\"}],\"enterprise_records\":[{\"企业名称\":\"霸州市康仙庄兴硕五金楼梯厂\",\"主营产品\":\"[\\\"钢结构\\\", \\\"家用螺旋楼梯\\\", \\\"叠加楼梯\\\", \\\"旋转楼梯\\\", \\\"单杆大柱\\\", \\\"钢木斜梁楼梯\\\", \\\"楼梯及配件\\\", \\\"弧形圆型楼梯\\\", \\\"中柱旋转楼梯\\\", \\\"双梁玻璃楼梯\\\", \\\"卷板楼梯\\\", \\\"复式斜梁楼梯\\\", \\\"铁艺楼梯\\\", \\\"样板房\\\", \\\"堆叠楼梯\\\", \\\"弧形楼梯\\\", \\\"木结构\\\", \\\"单梁梯\\\", \\\"双梁楼梯\\\"]\",\"城市\":\"廊坊市\",\"注册资本\":\"-\",\"成立时间\":\"2010-11-25\",\"推荐理由\":\"钢材是钢结构的主要材料之一，具有高强度、耐腐蚀、可塑性好等优点，因此能够应用在钢结构中。\"},{\"企业名称\":\"霸州市康仙庄鑫宏雅楼梯制造厂\",\"主营产品\":\"[\\\"楼梯\\\", \\\"玻璃钢楼梯\\\", \\\"旋转卷弧螺旋弧形楼梯\\\", \\\"户外楼梯护栏\\\", \\\"不锈钢楼梯扶手\\\", \\\"旋转式中式双梁铜楼梯\\\", \\\"铁艺楼梯\\\", \\\"L形楼梯\\\", \\\"旋转楼梯\\\", \\\"钢木楼梯\\\", \\\"阁楼复式楼梯\\\", \\\"直梯\\\", \\\"双梁夹玻璃楼梯\\\", \\\"钢结构旋转楼梯\\\", \\\"旋转钢木楼梯\\\", \\\"楼梯及配件\\\", \\\"酒店楼梯\\\", \\\"楼梯扶手\\\", \\\"网红楼梯\\\", \\\"阳台围栏楼梯扶手\\\", \\\"钢木斜梁楼梯\\\", \\\"实木楼梯\\\", \\\"卷板楼梯\\\", \\\"弧形楼梯\\\", \\\"双梁楼梯\\\"]\",\"城市\":\"廊坊市\",\"注册资本\":\"-\",\"成立时间\":\"2014-03-19\",\"推荐理由\":\"铝材是一种轻质、耐腐蚀、强度高的材料，适合用于制作楼梯。铝材制成的楼梯具有重量轻、易安装、耐用等优点。\"}],\"product_relation\":[{\"企业名称\":\"霸州市康仙庄兴硕五金楼梯厂\",\"下游产品\":\"钢结构\",\"关键词\":\"钢材\",\"关联理由\":\"钢材是钢结构的主要材料之一，具有高强度、耐腐蚀、可塑性好等优点，因此能够应用在钢结构中。\"},{\"企业名称\":\"霸州市康仙庄鑫宏雅楼梯制造厂\",\"下游产品\":\"楼梯\",\"关键词\":\"铝材\",\"关联理由\":\"铝材是一种轻质、耐腐蚀、强度高的材料，适合用于制作楼梯。铝材制成的楼梯具有重量轻、易安装、耐用等优点。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1078647,\"markdown_bytes\":14341}"
+            },
+            {
+              "expectation": "至少两个不同下游行业各有具体产品文本",
+              "status": "pass",
+              "evidence": "product_records有10条非空行业—产品映射，例如化工行业=换热器/储罐/反应釜，交通运输=车厢/轨道/车身/车架，家电行业=热水器/空调/冰箱；至少两个行业成立，报告明确不代表采购意向或供应关系。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":10,\"total\":10,\"args\":{\"keywords\":\"钢材,铝材\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":1000,\"args\":{\"keywords\":\"钢材,铝材\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"钢材,铝材\",\"matchKeyword\":\"钢材,铝材\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"10\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"1000\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"10\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"化工行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"4\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"90.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"10\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":10,\"industry_dist\":10,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":4,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"化工行业\",\"下游产品\":\"换热器、储罐、混合器、干燥机、离心机、管道、塔器、反应釜、蒸发器\"},{\"下游行业\":\"交通运输\",\"下游产品\":\"火车车厢、港口、油箱、客车、行李箱、机场、铁路轨道、轮船、车顶行李架、地铁、离合器壳、轮毂、公路桥梁、车门、码头、变速箱壳、货车、气缸盖、汽车车身、车轮、电动车车架、摩托车车架、气缸体、挡泥板、隧道、自行车车架、曲轴箱\"}],\"enterprise_records\":[{\"企业名称\":\"霸州市康仙庄兴硕五金楼梯厂\",\"主营产品\":\"[\\\"钢结构\\\", \\\"家用螺旋楼梯\\\", \\\"叠加楼梯\\\", \\\"旋转楼梯\\\", \\\"单杆大柱\\\", \\\"钢木斜梁楼梯\\\", \\\"楼梯及配件\\\", \\\"弧形圆型楼梯\\\", \\\"中柱旋转楼梯\\\", \\\"双梁玻璃楼梯\\\", \\\"卷板楼梯\\\", \\\"复式斜梁楼梯\\\", \\\"铁艺楼梯\\\", \\\"样板房\\\", \\\"堆叠楼梯\\\", \\\"弧形楼梯\\\", \\\"木结构\\\", \\\"单梁梯\\\", \\\"双梁楼梯\\\"]\",\"城市\":\"廊坊市\",\"注册资本\":\"-\",\"成立时间\":\"2010-11-25\",\"推荐理由\":\"钢材是钢结构的主要材料之一，具有高强度、耐腐蚀、可塑性好等优点，因此能够应用在钢结构中。\"},{\"企业名称\":\"霸州市康仙庄鑫宏雅楼梯制造厂\",\"主营产品\":\"[\\\"楼梯\\\", \\\"玻璃钢楼梯\\\", \\\"旋转卷弧螺旋弧形楼梯\\\", \\\"户外楼梯护栏\\\", \\\"不锈钢楼梯扶手\\\", \\\"旋转式中式双梁铜楼梯\\\", \\\"铁艺楼梯\\\", \\\"L形楼梯\\\", \\\"旋转楼梯\\\", \\\"钢木楼梯\\\", \\\"阁楼复式楼梯\\\", \\\"直梯\\\", \\\"双梁夹玻璃楼梯\\\", \\\"钢结构旋转楼梯\\\", \\\"旋转钢木楼梯\\\", \\\"楼梯及配件\\\", \\\"酒店楼梯\\\", \\\"楼梯扶手\\\", \\\"网红楼梯\\\", \\\"阳台围栏楼梯扶手\\\", \\\"钢木斜梁楼梯\\\", \\\"实木楼梯\\\", \\\"卷板楼梯\\\", \\\"弧形楼梯\\\", \\\"双梁楼梯\\\"]\",\"城市\":\"廊坊市\",\"注册资本\":\"-\",\"成立时间\":\"2014-03-19\",\"推荐理由\":\"铝材是一种轻质、耐腐蚀、强度高的材料，适合用于制作楼梯。铝材制成的楼梯具有重量轻、易安装、耐用等优点。\"}],\"product_relation\":[{\"企业名称\":\"霸州市康仙庄兴硕五金楼梯厂\",\"下游产品\":\"钢结构\",\"关键词\":\"钢材\",\"关联理由\":\"钢材是钢结构的主要材料之一，具有高强度、耐腐蚀、可塑性好等优点，因此能够应用在钢结构中。\"},{\"企业名称\":\"霸州市康仙庄鑫宏雅楼梯制造厂\",\"下游产品\":\"楼梯\",\"关键词\":\"铝材\",\"关联理由\":\"铝材是一种轻质、耐腐蚀、强度高的材料，适合用于制作楼梯。铝材制成的楼梯具有重量轻、易安装、耐用等优点。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1078647,\"markdown_bytes\":14341}"
+            },
+            {
+              "expectation": "映射结论必须来自 product_records 实际字段，不能只用关键词参数、行业总数或企业空结果",
+              "status": "pass",
+              "evidence": "product_records有10条非空行业—产品映射，例如化工行业=换热器/储罐/反应釜，交通运输=车厢/轨道/车身/车架，家电行业=热水器/空调/冰箱；至少两个行业成立，报告明确不代表采购意向或供应关系。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":10,\"total\":10,\"args\":{\"keywords\":\"钢材,铝材\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":1000,\"args\":{\"keywords\":\"钢材,铝材\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"钢材,铝材\",\"matchKeyword\":\"钢材,铝材\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"10\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"1000\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"10\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"化工行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"4\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"90.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"10\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":10,\"industry_dist\":10,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":4,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"化工行业\",\"下游产品\":\"换热器、储罐、混合器、干燥机、离心机、管道、塔器、反应釜、蒸发器\"},{\"下游行业\":\"交通运输\",\"下游产品\":\"火车车厢、港口、油箱、客车、行李箱、机场、铁路轨道、轮船、车顶行李架、地铁、离合器壳、轮毂、公路桥梁、车门、码头、变速箱壳、货车、气缸盖、汽车车身、车轮、电动车车架、摩托车车架、气缸体、挡泥板、隧道、自行车车架、曲轴箱\"}],\"enterprise_records\":[{\"企业名称\":\"霸州市康仙庄兴硕五金楼梯厂\",\"主营产品\":\"[\\\"钢结构\\\", \\\"家用螺旋楼梯\\\", \\\"叠加楼梯\\\", \\\"旋转楼梯\\\", \\\"单杆大柱\\\", \\\"钢木斜梁楼梯\\\", \\\"楼梯及配件\\\", \\\"弧形圆型楼梯\\\", \\\"中柱旋转楼梯\\\", \\\"双梁玻璃楼梯\\\", \\\"卷板楼梯\\\", \\\"复式斜梁楼梯\\\", \\\"铁艺楼梯\\\", \\\"样板房\\\", \\\"堆叠楼梯\\\", \\\"弧形楼梯\\\", \\\"木结构\\\", \\\"单梁梯\\\", \\\"双梁楼梯\\\"]\",\"城市\":\"廊坊市\",\"注册资本\":\"-\",\"成立时间\":\"2010-11-25\",\"推荐理由\":\"钢材是钢结构的主要材料之一，具有高强度、耐腐蚀、可塑性好等优点，因此能够应用在钢结构中。\"},{\"企业名称\":\"霸州市康仙庄鑫宏雅楼梯制造厂\",\"主营产品\":\"[\\\"楼梯\\\", \\\"玻璃钢楼梯\\\", \\\"旋转卷弧螺旋弧形楼梯\\\", \\\"户外楼梯护栏\\\", \\\"不锈钢楼梯扶手\\\", \\\"旋转式中式双梁铜楼梯\\\", \\\"铁艺楼梯\\\", \\\"L形楼梯\\\", \\\"旋转楼梯\\\", \\\"钢木楼梯\\\", \\\"阁楼复式楼梯\\\", \\\"直梯\\\", \\\"双梁夹玻璃楼梯\\\", \\\"钢结构旋转楼梯\\\", \\\"旋转钢木楼梯\\\", \\\"楼梯及配件\\\", \\\"酒店楼梯\\\", \\\"楼梯扶手\\\", \\\"网红楼梯\\\", \\\"阳台围栏楼梯扶手\\\", \\\"钢木斜梁楼梯\\\", \\\"实木楼梯\\\", \\\"卷板楼梯\\\", \\\"弧形楼梯\\\", \\\"双梁楼梯\\\"]\",\"城市\":\"廊坊市\",\"注册资本\":\"-\",\"成立时间\":\"2014-03-19\",\"推荐理由\":\"铝材是一种轻质、耐腐蚀、强度高的材料，适合用于制作楼梯。铝材制成的楼梯具有重量轻、易安装、耐用等优点。\"}],\"product_relation\":[{\"企业名称\":\"霸州市康仙庄兴硕五金楼梯厂\",\"下游产品\":\"钢结构\",\"关键词\":\"钢材\",\"关联理由\":\"钢材是钢结构的主要材料之一，具有高强度、耐腐蚀、可塑性好等优点，因此能够应用在钢结构中。\"},{\"企业名称\":\"霸州市康仙庄鑫宏雅楼梯制造厂\",\"下游产品\":\"楼梯\",\"关键词\":\"铝材\",\"关联理由\":\"铝材是一种轻质、耐腐蚀、强度高的材料，适合用于制作楼梯。铝材制成的楼梯具有重量轻、易安装、耐用等优点。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1078647,\"markdown_bytes\":14341}"
+            },
+            {
+              "expectation": "不得把产品映射解释为采购意向或供应关系",
+              "status": "pass",
+              "evidence": "product_records有10条非空行业—产品映射，例如化工行业=换热器/储罐/反应釜，交通运输=车厢/轨道/车身/车架，家电行业=热水器/空调/冰箱；至少两个行业成立，报告明确不代表采购意向或供应关系。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":10,\"total\":10,\"args\":{\"keywords\":\"钢材,铝材\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":1000,\"args\":{\"keywords\":\"钢材,铝材\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"钢材,铝材\",\"matchKeyword\":\"钢材,铝材\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"10\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"1000\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"10\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"化工行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"4\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"90.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"10\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":10,\"industry_dist\":10,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":4,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"化工行业\",\"下游产品\":\"换热器、储罐、混合器、干燥机、离心机、管道、塔器、反应釜、蒸发器\"},{\"下游行业\":\"交通运输\",\"下游产品\":\"火车车厢、港口、油箱、客车、行李箱、机场、铁路轨道、轮船、车顶行李架、地铁、离合器壳、轮毂、公路桥梁、车门、码头、变速箱壳、货车、气缸盖、汽车车身、车轮、电动车车架、摩托车车架、气缸体、挡泥板、隧道、自行车车架、曲轴箱\"}],\"enterprise_records\":[{\"企业名称\":\"霸州市康仙庄兴硕五金楼梯厂\",\"主营产品\":\"[\\\"钢结构\\\", \\\"家用螺旋楼梯\\\", \\\"叠加楼梯\\\", \\\"旋转楼梯\\\", \\\"单杆大柱\\\", \\\"钢木斜梁楼梯\\\", \\\"楼梯及配件\\\", \\\"弧形圆型楼梯\\\", \\\"中柱旋转楼梯\\\", \\\"双梁玻璃楼梯\\\", \\\"卷板楼梯\\\", \\\"复式斜梁楼梯\\\", \\\"铁艺楼梯\\\", \\\"样板房\\\", \\\"堆叠楼梯\\\", \\\"弧形楼梯\\\", \\\"木结构\\\", \\\"单梁梯\\\", \\\"双梁楼梯\\\"]\",\"城市\":\"廊坊市\",\"注册资本\":\"-\",\"成立时间\":\"2010-11-25\",\"推荐理由\":\"钢材是钢结构的主要材料之一，具有高强度、耐腐蚀、可塑性好等优点，因此能够应用在钢结构中。\"},{\"企业名称\":\"霸州市康仙庄鑫宏雅楼梯制造厂\",\"主营产品\":\"[\\\"楼梯\\\", \\\"玻璃钢楼梯\\\", \\\"旋转卷弧螺旋弧形楼梯\\\", \\\"户外楼梯护栏\\\", \\\"不锈钢楼梯扶手\\\", \\\"旋转式中式双梁铜楼梯\\\", \\\"铁艺楼梯\\\", \\\"L形楼梯\\\", \\\"旋转楼梯\\\", \\\"钢木楼梯\\\", \\\"阁楼复式楼梯\\\", \\\"直梯\\\", \\\"双梁夹玻璃楼梯\\\", \\\"钢结构旋转楼梯\\\", \\\"旋转钢木楼梯\\\", \\\"楼梯及配件\\\", \\\"酒店楼梯\\\", \\\"楼梯扶手\\\", \\\"网红楼梯\\\", \\\"阳台围栏楼梯扶手\\\", \\\"钢木斜梁楼梯\\\", \\\"实木楼梯\\\", \\\"卷板楼梯\\\", \\\"弧形楼梯\\\", \\\"双梁楼梯\\\"]\",\"城市\":\"廊坊市\",\"注册资本\":\"-\",\"成立时间\":\"2014-03-19\",\"推荐理由\":\"铝材是一种轻质、耐腐蚀、强度高的材料，适合用于制作楼梯。铝材制成的楼梯具有重量轻、易安装、耐用等优点。\"}],\"product_relation\":[{\"企业名称\":\"霸州市康仙庄兴硕五金楼梯厂\",\"下游产品\":\"钢结构\",\"关键词\":\"钢材\",\"关联理由\":\"钢材是钢结构的主要材料之一，具有高强度、耐腐蚀、可塑性好等优点，因此能够应用在钢结构中。\"},{\"企业名称\":\"霸州市康仙庄鑫宏雅楼梯制造厂\",\"下游产品\":\"楼梯\",\"关键词\":\"铝材\",\"关联理由\":\"铝材是一种轻质、耐腐蚀、强度高的材料，适合用于制作楼梯。铝材制成的楼梯具有重量轻、易安装、耐用等优点。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1078647,\"markdown_bytes\":14341}"
+            }
+          ],
+          "issues": [],
+          "evidence_binding": {
+            "report.json": "368a3a537ea29540416aeafb59f6a1d99d47bbf1feebf503a0630349860e4290",
+            "report.html": "92fb124ec3beedc62f1f88b3fe3329f2ef67c92de7004511e6cf1fb06fffd92b",
+            "report.md": "696fb38785c0bb00b59661e04b3570c02f130573ef3e70601d1e08d450bf689b",
+            "calls.json": "9c396c711feb81320e10c12fa2415f76ac877083a0f6d94de7e274e8fe32211e",
+            "result.json": "2cc3c1f1f164a0d90edb7c06c08181016c7e6502357b6ab04e334acb16397f6a",
+            "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+          }
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "10-industrial-robot-downstream-relations",
+        "title": "工业机器人下游应用与关系样本",
+        "user_request": "请查询工业机器人的下游应用行业、当前页候选企业和产品关联理由；不要启用高级筛选，也不要认定采购意向或合格供应商。",
+        "purpose": "审查普通下游产品、企业与推荐理由能否形成可追溯关系样本。",
+        "args": [
+          "--keywords",
+          "工业机器人",
+          "--page-size",
+          "10"
+        ],
+        "expected_checks": [
+          "product_records 与 enterprise_records 均至少有一条实际返回记录",
+          "至少一条 product_relation 同时具备非空企业名称、下游产品、关键词和关联理由",
+          "关系记录中的企业名称必须能在 enterprise_records 找到对应实体",
+          "推荐理由必须保留为上游关联说明，不得改写为采购意向",
+          "不得仅凭企业总数、城市数或高级筛选未请求而通过"
+        ],
+        "limitations": [
+          "推荐理由仍需人工复核",
+          "工厂型企业字段不代表验厂或资质",
+          "普通下游结果不是高级筛选结果"
+        ]
+      },
+      "result": {
+        "schema_version": 1,
+        "skill": "supply-skill",
+        "case_id": "10-industrial-robot-downstream-relations",
+        "title": "工业机器人下游应用与关系样本",
+        "invocation_id": "1793069219029900000",
+        "provenance": {
+          "integrator_id": "683e574805537ace146cc05e",
+          "runner_sha256": "05777c2f2b0791cb5157aef691206606dade8df7af3b17212285b7ae74632a66",
+          "credential_policy_sha256": "bcabf08a1ca92f28357c0e57a8bae9bfa910eb1d4b204d8195ee3b7a77106eed",
+          "scenario_sha256": "7d966f33a881beab3e9d0518fd03ad2f10d1cd906b404ba9e41d2f0f049e5d0d",
+          "skill_source_hashes": {
+            "scripts/common.py": "2d3479461f7bb5e0dc323fb4b6955c48f8d40364d8ddfcecaec33ab6812edb7b",
+            "scripts/compose_report.py": "0d8f86e271cb7a93f74fccdc79308e9849ea0f6e5fe419739a651686873b2abb",
+            "scripts/mcp_client.py": "d2e0cd97c81241c9a12552fad257d6ff00f78b01c2e1286d1d8395221fc7336d",
+            "scripts/render_report.py": "d9a1b988aa111b969094ccb5dcbdb91ba09b7a5591c0cfa935cb3553232c91bd",
+            "scripts/validate_config.py": "ef656d38fc698cf733507c2e9d6c811b18c734385a8ff12dbf46e76fd687b0d2"
+          },
+          "upstream_source_hashes": {
+            "supply-mcp-server": "8e8bb9cefb0bb99c510f31ac4b136dab58fc6f171cf56cea8bbaad9846c8cd36"
+          },
+          "upstream_dependency_hashes": {
+            "supply-mcp-server/server/mcp_server.py": "8e8bb9cefb0bb99c510f31ac4b136dab58fc6f171cf56cea8bbaad9846c8cd36"
+          }
+        },
+        "source_changed_during_run": false,
+        "started_at": "2026-10-27T10:46:59+08:00",
+        "elapsed_seconds": 4.429,
+        "returncode": 0,
+        "exception_type": null,
+        "command": "python3 supply-skill/scripts/compose_report.py --keywords '工业机器人' --page-size 10 --output supply-skill/output/live-replaced-20261027/10-industrial-robot-downstream-relations/report.json --report-output supply-skill/output/live-replaced-20261027/10-industrial-robot-downstream-relations/report.html",
+        "transport": "local MCP servers via loopback streamable-http",
+        "cache_used": false,
+        "call_count": 2,
+        "successful_data_calls": 2,
+        "empty_calls": 0,
+        "failed_calls": 0,
+        "checks": {
+          "issues": [],
+          "warnings": [],
+          "coverage_pct": 100,
+          "subject": {
+            "keywords": "工业机器人",
+            "matchKeyword": "工业机器人",
+            "main_products": "",
+            "address": "",
+            "is_high_tech": "",
+            "is_top_enterprise": "",
+            "is_foreign_trade": "",
+            "reg_capital_min": "",
+            "reg_capital_max": "",
+            "advanced_filter_address": "",
+            "advanced_enterprise_type": ""
+          },
+          "title": "“工业机器人” 供应链潜客推荐报告",
+          "data_mode": null,
+          "metrics": [
+            {
+              "label": "下游产品数",
+              "value": "3",
+              "hint": "下游产品检索命中条数"
+            },
+            {
+              "label": "下游企业数",
+              "value": "153",
+              "hint": "下游企业检索命中条数"
+            },
+            {
+              "label": "下游行业数",
+              "value": "3",
+              "hint": "覆盖的下游行业数量"
+            },
+            {
+              "label": "主要下游行业",
+              "value": "焊接行业",
+              "hint": "企业最多的下游行业"
+            },
+            {
+              "label": "覆盖城市数",
+              "value": "9",
+              "hint": "下游企业所在城市数"
+            },
+            {
+              "label": "城市CR3",
+              "value": "40.0%",
+              "hint": "前3大城市企业集中度"
+            },
+            {
+              "label": "下游产品类目",
+              "value": "3",
+              "hint": "关联的下游产品类别数"
+            }
+          ],
+          "quality_report": {
+            "total_sections": 6,
+            "populated_sections": 6,
+            "empty_sections": 0,
+            "coverage_pct": 100
+          },
+          "unregistered_tools": [],
+          "checks": {
+            "json_html_markdown": true,
+            "explicit_live": true,
+            "tool_calls_recorded": 2,
+            "offline_scripts": true,
+            "independent_rerender": true,
+            "offline_browser": true
+          }
+        },
+        "status": "passed",
+        "source_hashes": {
+          "scripts/common.py": "2d3479461f7bb5e0dc323fb4b6955c48f8d40364d8ddfcecaec33ab6812edb7b",
+          "scripts/compose_report.py": "0d8f86e271cb7a93f74fccdc79308e9849ea0f6e5fe419739a651686873b2abb",
+          "scripts/mcp_client.py": "d2e0cd97c81241c9a12552fad257d6ff00f78b01c2e1286d1d8395221fc7336d",
+          "scripts/render_report.py": "d9a1b988aa111b969094ccb5dcbdb91ba09b7a5591c0cfa935cb3553232c91bd",
+          "scripts/validate_config.py": "ef656d38fc698cf733507c2e9d6c811b18c734385a8ff12dbf46e76fd687b0d2"
+        },
+        "technical_status": "passed",
+        "audited_at": "2026-10-27T11:13:04+08:00",
+        "evidence_binding": {
+          "report.json": "add81ac781c148c7c10b86085018bbb24727413539bc90edcaa75618e425c4b6",
+          "report.html": "7b76dad2c357eca83d328f9cceb69bba6dcd41dd0ec46e57885d5caa1c35c200",
+          "report.md": "1e9a1a340cbd5ab398cbdccf69c45466f497682aef31dea068a6996d2d83bb05",
+          "calls.json": "34c03f2e989d27ef858499ffa9305817e1b71bda508299455e9686ecac3070c9",
+          "result.json": "fafb4d988150e40469efc019ee317c2c1e5209c4c03b6d8318e095c96a0f046b",
+          "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+        },
+        "business_review": {
+          "id": "10-industrial-robot-downstream-relations",
+          "verdict": "acceptable",
+          "summary": "本轮真实产物的全部清单检查均有当前字段证据，且报告保留样本/缺失/关系边界。",
+          "checks": [
+            {
+              "expectation": "product_records 与 enterprise_records 均至少有一条实际返回记录",
+              "status": "pass",
+              "evidence": "product_records含焊接、喷涂、装配3个行业；enterprise_records有10/153。浦北县张黄镇鑫宏电子厂的关系记录同列企业名、玩具装配、关键词工业机器人及完整关联理由，企业名也存在于企业明细且主营含玩具/电子装配；理由保留为上游关联说明。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":3,\"total\":3,\"args\":{\"keywords\":\"工业机器人\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":153,\"args\":{\"keywords\":\"工业机器人\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"工业机器人\",\"matchKeyword\":\"工业机器人\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"3\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"153\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"3\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"焊接行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"9\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"40.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"3\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":3,\"industry_dist\":3,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":9,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"焊接行业\",\"下游产品\":\"汽车车身焊接、船舶分段焊接、摩托车车架焊接、建筑机械部件焊接、铁路车辆焊接、管道焊接、家电外壳焊接、压力容器焊接、钢结构桥梁焊接、航空零部件焊接\"},{\"下游行业\":\"喷涂行业\",\"下游产品\":\"乐器外壳喷涂、金属构件喷涂、玩具表面喷涂、家电外壳喷涂、家具表面喷涂、汽车车身喷涂、建筑构件喷涂、塑料制品喷涂、电子产品外壳喷涂\"}],\"enterprise_records\":[{\"企业名称\":\"浦北县张黄镇鑫宏电子厂\",\"主营产品\":\"[\\\"玩具装配\\\", \\\"LED加工帮定\\\", \\\"手机贴\\\", \\\"磁力扣\\\", \\\"电子装配\\\", \\\"SMT手工贴片\\\", \\\"各类IC帮定加\\\", \\\"手机来电闪\\\", \\\"语音COB\\\", \\\"七彩蜡烛机芯\\\", \\\"各类IC帮定\\\", \\\"毛绒玩具机芯\\\", \\\"各类闪灯饰品\\\", \\\"闪光胸章\\\", \\\"蜡烛音乐机芯\\\"]\",\"城市\":\"钦州市\",\"注册资本\":\"10000（上游原值，单位未声明）\",\"成立时间\":\"2009-06-23\",\"推荐理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"},{\"企业名称\":\"河源市源城区盈和塑胶装配加工厂\",\"主营产品\":\"[\\\"玩具装配\\\", \\\"塑料制品\\\", \\\"塑料制品加工\\\", \\\"塑胶装配加工\\\"]\",\"城市\":\"河源市\",\"注册资本\":\"-\",\"成立时间\":\"2019-04-29\",\"推荐理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"}],\"product_relation\":[{\"企业名称\":\"浦北县张黄镇鑫宏电子厂\",\"下游产品\":\"玩具装配\",\"关键词\":\"工业机器人\",\"关联理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"},{\"企业名称\":\"河源市源城区盈和塑胶装配加工厂\",\"下游产品\":\"玩具装配\",\"关键词\":\"工业机器人\",\"关联理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1077735,\"markdown_bytes\":14454}"
+            },
+            {
+              "expectation": "至少一条 product_relation 同时具备非空企业名称、下游产品、关键词和关联理由",
+              "status": "pass",
+              "evidence": "product_records含焊接、喷涂、装配3个行业；enterprise_records有10/153。浦北县张黄镇鑫宏电子厂的关系记录同列企业名、玩具装配、关键词工业机器人及完整关联理由，企业名也存在于企业明细且主营含玩具/电子装配；理由保留为上游关联说明。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":3,\"total\":3,\"args\":{\"keywords\":\"工业机器人\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":153,\"args\":{\"keywords\":\"工业机器人\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"工业机器人\",\"matchKeyword\":\"工业机器人\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"3\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"153\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"3\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"焊接行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"9\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"40.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"3\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":3,\"industry_dist\":3,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":9,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"焊接行业\",\"下游产品\":\"汽车车身焊接、船舶分段焊接、摩托车车架焊接、建筑机械部件焊接、铁路车辆焊接、管道焊接、家电外壳焊接、压力容器焊接、钢结构桥梁焊接、航空零部件焊接\"},{\"下游行业\":\"喷涂行业\",\"下游产品\":\"乐器外壳喷涂、金属构件喷涂、玩具表面喷涂、家电外壳喷涂、家具表面喷涂、汽车车身喷涂、建筑构件喷涂、塑料制品喷涂、电子产品外壳喷涂\"}],\"enterprise_records\":[{\"企业名称\":\"浦北县张黄镇鑫宏电子厂\",\"主营产品\":\"[\\\"玩具装配\\\", \\\"LED加工帮定\\\", \\\"手机贴\\\", \\\"磁力扣\\\", \\\"电子装配\\\", \\\"SMT手工贴片\\\", \\\"各类IC帮定加\\\", \\\"手机来电闪\\\", \\\"语音COB\\\", \\\"七彩蜡烛机芯\\\", \\\"各类IC帮定\\\", \\\"毛绒玩具机芯\\\", \\\"各类闪灯饰品\\\", \\\"闪光胸章\\\", \\\"蜡烛音乐机芯\\\"]\",\"城市\":\"钦州市\",\"注册资本\":\"10000（上游原值，单位未声明）\",\"成立时间\":\"2009-06-23\",\"推荐理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"},{\"企业名称\":\"河源市源城区盈和塑胶装配加工厂\",\"主营产品\":\"[\\\"玩具装配\\\", \\\"塑料制品\\\", \\\"塑料制品加工\\\", \\\"塑胶装配加工\\\"]\",\"城市\":\"河源市\",\"注册资本\":\"-\",\"成立时间\":\"2019-04-29\",\"推荐理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"}],\"product_relation\":[{\"企业名称\":\"浦北县张黄镇鑫宏电子厂\",\"下游产品\":\"玩具装配\",\"关键词\":\"工业机器人\",\"关联理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"},{\"企业名称\":\"河源市源城区盈和塑胶装配加工厂\",\"下游产品\":\"玩具装配\",\"关键词\":\"工业机器人\",\"关联理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1077735,\"markdown_bytes\":14454}"
+            },
+            {
+              "expectation": "关系记录中的企业名称必须能在 enterprise_records 找到对应实体",
+              "status": "pass",
+              "evidence": "product_records含焊接、喷涂、装配3个行业；enterprise_records有10/153。浦北县张黄镇鑫宏电子厂的关系记录同列企业名、玩具装配、关键词工业机器人及完整关联理由，企业名也存在于企业明细且主营含玩具/电子装配；理由保留为上游关联说明。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":3,\"total\":3,\"args\":{\"keywords\":\"工业机器人\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":153,\"args\":{\"keywords\":\"工业机器人\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"工业机器人\",\"matchKeyword\":\"工业机器人\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"3\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"153\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"3\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"焊接行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"9\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"40.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"3\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":3,\"industry_dist\":3,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":9,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"焊接行业\",\"下游产品\":\"汽车车身焊接、船舶分段焊接、摩托车车架焊接、建筑机械部件焊接、铁路车辆焊接、管道焊接、家电外壳焊接、压力容器焊接、钢结构桥梁焊接、航空零部件焊接\"},{\"下游行业\":\"喷涂行业\",\"下游产品\":\"乐器外壳喷涂、金属构件喷涂、玩具表面喷涂、家电外壳喷涂、家具表面喷涂、汽车车身喷涂、建筑构件喷涂、塑料制品喷涂、电子产品外壳喷涂\"}],\"enterprise_records\":[{\"企业名称\":\"浦北县张黄镇鑫宏电子厂\",\"主营产品\":\"[\\\"玩具装配\\\", \\\"LED加工帮定\\\", \\\"手机贴\\\", \\\"磁力扣\\\", \\\"电子装配\\\", \\\"SMT手工贴片\\\", \\\"各类IC帮定加\\\", \\\"手机来电闪\\\", \\\"语音COB\\\", \\\"七彩蜡烛机芯\\\", \\\"各类IC帮定\\\", \\\"毛绒玩具机芯\\\", \\\"各类闪灯饰品\\\", \\\"闪光胸章\\\", \\\"蜡烛音乐机芯\\\"]\",\"城市\":\"钦州市\",\"注册资本\":\"10000（上游原值，单位未声明）\",\"成立时间\":\"2009-06-23\",\"推荐理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"},{\"企业名称\":\"河源市源城区盈和塑胶装配加工厂\",\"主营产品\":\"[\\\"玩具装配\\\", \\\"塑料制品\\\", \\\"塑料制品加工\\\", \\\"塑胶装配加工\\\"]\",\"城市\":\"河源市\",\"注册资本\":\"-\",\"成立时间\":\"2019-04-29\",\"推荐理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"}],\"product_relation\":[{\"企业名称\":\"浦北县张黄镇鑫宏电子厂\",\"下游产品\":\"玩具装配\",\"关键词\":\"工业机器人\",\"关联理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"},{\"企业名称\":\"河源市源城区盈和塑胶装配加工厂\",\"下游产品\":\"玩具装配\",\"关键词\":\"工业机器人\",\"关联理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1077735,\"markdown_bytes\":14454}"
+            },
+            {
+              "expectation": "推荐理由必须保留为上游关联说明，不得改写为采购意向",
+              "status": "pass",
+              "evidence": "product_records含焊接、喷涂、装配3个行业；enterprise_records有10/153。浦北县张黄镇鑫宏电子厂的关系记录同列企业名、玩具装配、关键词工业机器人及完整关联理由，企业名也存在于企业明细且主营含玩具/电子装配；理由保留为上游关联说明。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":3,\"total\":3,\"args\":{\"keywords\":\"工业机器人\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":153,\"args\":{\"keywords\":\"工业机器人\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"工业机器人\",\"matchKeyword\":\"工业机器人\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"3\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"153\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"3\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"焊接行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"9\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"40.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"3\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":3,\"industry_dist\":3,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":9,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"焊接行业\",\"下游产品\":\"汽车车身焊接、船舶分段焊接、摩托车车架焊接、建筑机械部件焊接、铁路车辆焊接、管道焊接、家电外壳焊接、压力容器焊接、钢结构桥梁焊接、航空零部件焊接\"},{\"下游行业\":\"喷涂行业\",\"下游产品\":\"乐器外壳喷涂、金属构件喷涂、玩具表面喷涂、家电外壳喷涂、家具表面喷涂、汽车车身喷涂、建筑构件喷涂、塑料制品喷涂、电子产品外壳喷涂\"}],\"enterprise_records\":[{\"企业名称\":\"浦北县张黄镇鑫宏电子厂\",\"主营产品\":\"[\\\"玩具装配\\\", \\\"LED加工帮定\\\", \\\"手机贴\\\", \\\"磁力扣\\\", \\\"电子装配\\\", \\\"SMT手工贴片\\\", \\\"各类IC帮定加\\\", \\\"手机来电闪\\\", \\\"语音COB\\\", \\\"七彩蜡烛机芯\\\", \\\"各类IC帮定\\\", \\\"毛绒玩具机芯\\\", \\\"各类闪灯饰品\\\", \\\"闪光胸章\\\", \\\"蜡烛音乐机芯\\\"]\",\"城市\":\"钦州市\",\"注册资本\":\"10000（上游原值，单位未声明）\",\"成立时间\":\"2009-06-23\",\"推荐理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"},{\"企业名称\":\"河源市源城区盈和塑胶装配加工厂\",\"主营产品\":\"[\\\"玩具装配\\\", \\\"塑料制品\\\", \\\"塑料制品加工\\\", \\\"塑胶装配加工\\\"]\",\"城市\":\"河源市\",\"注册资本\":\"-\",\"成立时间\":\"2019-04-29\",\"推荐理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"}],\"product_relation\":[{\"企业名称\":\"浦北县张黄镇鑫宏电子厂\",\"下游产品\":\"玩具装配\",\"关键词\":\"工业机器人\",\"关联理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"},{\"企业名称\":\"河源市源城区盈和塑胶装配加工厂\",\"下游产品\":\"玩具装配\",\"关键词\":\"工业机器人\",\"关联理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1077735,\"markdown_bytes\":14454}"
+            },
+            {
+              "expectation": "不得仅凭企业总数、城市数或高级筛选未请求而通过",
+              "status": "pass",
+              "evidence": "product_records含焊接、喷涂、装配3个行业；enterprise_records有10/153。浦北县张黄镇鑫宏电子厂的关系记录同列企业名、玩具装配、关键词工业机器人及完整关联理由，企业名也存在于企业明细且主营含玩具/电子装配；理由保留为上游关联说明。 当前冻结快照：{\"technical_status\":\"passed\",\"successful_data_calls\":2,\"calls\":[{\"tool\":\"supply_get_down_stream_products\",\"status\":\"data\",\"rows\":3,\"total\":3,\"args\":{\"keywords\":\"工业机器人\"}},{\"tool\":\"supply_get_down_stream_enterprises\",\"status\":\"data\",\"rows\":10,\"total\":153,\"args\":{\"keywords\":\"工业机器人\",\"pageIndex\":1,\"pageSize\":10}}],\"subject\":{\"keywords\":\"工业机器人\",\"matchKeyword\":\"工业机器人\",\"main_products\":\"\",\"address\":\"\",\"is_high_tech\":\"\",\"is_top_enterprise\":\"\",\"is_foreign_trade\":\"\",\"reg_capital_min\":\"\",\"reg_capital_max\":\"\",\"advanced_filter_address\":\"\",\"advanced_enterprise_type\":\"\"},\"metrics\":[{\"label\":\"下游产品数\",\"value\":\"3\",\"hint\":\"下游产品检索命中条数\"},{\"label\":\"下游企业数\",\"value\":\"153\",\"hint\":\"下游企业检索命中条数\"},{\"label\":\"下游行业数\",\"value\":\"3\",\"hint\":\"覆盖的下游行业数量\"},{\"label\":\"主要下游行业\",\"value\":\"焊接行业\",\"hint\":\"企业最多的下游行业\"},{\"label\":\"覆盖城市数\",\"value\":\"9\",\"hint\":\"下游企业所在城市数\"},{\"label\":\"城市CR3\",\"value\":\"40.0%\",\"hint\":\"前3大城市企业集中度\"},{\"label\":\"下游产品类目\",\"value\":\"3\",\"hint\":\"关联的下游产品类别数\"}],\"core_counts\":{\"sections\":6,\"product_records\":3,\"industry_dist\":3,\"enterprise_records\":10,\"product_relation\":10,\"region_dist\":9,\"filter_records\":0,\"reg_capital_rmb\":0},\"core_samples\":{\"product_records\":[{\"下游行业\":\"焊接行业\",\"下游产品\":\"汽车车身焊接、船舶分段焊接、摩托车车架焊接、建筑机械部件焊接、铁路车辆焊接、管道焊接、家电外壳焊接、压力容器焊接、钢结构桥梁焊接、航空零部件焊接\"},{\"下游行业\":\"喷涂行业\",\"下游产品\":\"乐器外壳喷涂、金属构件喷涂、玩具表面喷涂、家电外壳喷涂、家具表面喷涂、汽车车身喷涂、建筑构件喷涂、塑料制品喷涂、电子产品外壳喷涂\"}],\"enterprise_records\":[{\"企业名称\":\"浦北县张黄镇鑫宏电子厂\",\"主营产品\":\"[\\\"玩具装配\\\", \\\"LED加工帮定\\\", \\\"手机贴\\\", \\\"磁力扣\\\", \\\"电子装配\\\", \\\"SMT手工贴片\\\", \\\"各类IC帮定加\\\", \\\"手机来电闪\\\", \\\"语音COB\\\", \\\"七彩蜡烛机芯\\\", \\\"各类IC帮定\\\", \\\"毛绒玩具机芯\\\", \\\"各类闪灯饰品\\\", \\\"闪光胸章\\\", \\\"蜡烛音乐机芯\\\"]\",\"城市\":\"钦州市\",\"注册资本\":\"10000（上游原值，单位未声明）\",\"成立时间\":\"2009-06-23\",\"推荐理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"},{\"企业名称\":\"河源市源城区盈和塑胶装配加工厂\",\"主营产品\":\"[\\\"玩具装配\\\", \\\"塑料制品\\\", \\\"塑料制品加工\\\", \\\"塑胶装配加工\\\"]\",\"城市\":\"河源市\",\"注册资本\":\"-\",\"成立时间\":\"2019-04-29\",\"推荐理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"}],\"product_relation\":[{\"企业名称\":\"浦北县张黄镇鑫宏电子厂\",\"下游产品\":\"玩具装配\",\"关键词\":\"工业机器人\",\"关联理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"},{\"企业名称\":\"河源市源城区盈和塑胶装配加工厂\",\"下游产品\":\"玩具装配\",\"关键词\":\"工业机器人\",\"关联理由\":\"工业机器人具有通用性强的特点，且在制造业中可应用于装配领域。玩具装配属于装配的一种，因此工业机器人可以凭借其高自动性和多轴运动能力，通过编程完成玩具的装配任务。\"}]},\"quality\":{\"total_sections\":6,\"populated_sections\":6,\"empty_sections\":0,\"coverage_pct\":100},\"limit\":\"高级筛选是独立的全库企业筛选，不与关键词下游产品/企业结果求交集，也不能据此推断采购意向；清单最多返回 500 条。count 与 list.total 冲突时不采用任一数值作为有效规模。\",\"html_bytes\":1077735,\"markdown_bytes\":14454}"
+            }
+          ],
+          "issues": [],
+          "evidence_binding": {
+            "report.json": "add81ac781c148c7c10b86085018bbb24727413539bc90edcaa75618e425c4b6",
+            "report.html": "7b76dad2c357eca83d328f9cceb69bba6dcd41dd0ec46e57885d5caa1c35c200",
+            "report.md": "1e9a1a340cbd5ab398cbdccf69c45466f497682aef31dea068a6996d2d83bb05",
+            "calls.json": "34c03f2e989d27ef858499ffa9305817e1b71bda508299455e9686ecac3070c9",
+            "result.json": "fafb4d988150e40469efc019ee317c2c1e5209c4c03b6d8318e095c96a0f046b",
+            "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+          }
+        }
+      }
+    }
+  ]
+}
