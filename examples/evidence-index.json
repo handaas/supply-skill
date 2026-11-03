@@ -17,7 +17,7 @@
         "business-review.json": "50abbf43040498af21ffd1303350b48b3f22810533409ce91bd6630435184e4d",
         "browser-check.json": "35c049715f5a22426920df23535af9aab5aa23175fb24ec0f6a3edec672baf46"
       },
-      "audit_record": "../../test-records/live-replaced-20261027/02-chip-high-tech.md"
+      "audit_record": "../test-records/live-replaced-20261027/02-chip-high-tech.md"
     },
     {
       "skill": "supply-skill",
@@ -35,7 +35,7 @@
         "business-review.json": "3aa2e0c93b4f5220aec7778c0a7235b1045d4b05c8ffb918918630c3e1bc3321",
         "browser-check.json": "9def705c90f8df5520996550dc59590863ad556863b2e845387ef21348b88c83"
       },
-      "audit_record": "../../test-records/live-replaced-20261027/07-solar-components.md"
+      "audit_record": "../test-records/live-replaced-20261027/07-solar-components.md"
     },
     {
       "skill": "supply-skill",
@@ -53,7 +53,7 @@
         "business-review.json": "1b886e832733211a5d3fa6bfd94a20936a353281d49e8b272ae0b96b616f22ac",
         "browser-check.json": "dc49587fb6dd48c6b197bf4ce8b1bff7f117b330c167ec75cf08c6214b7e289d"
       },
-      "audit_record": "../../test-records/live-replaced-20261027/09-steel-aluminum-product-map.md"
+      "audit_record": "../test-records/live-replaced-20261027/09-steel-aluminum-product-map.md"
     },
     {
       "skill": "supply-skill",
@@ -71,7 +71,7 @@
         "business-review.json": "86047bed1552d6b09d34b922235a2baebabad092abfc07ddf66815cde732a150",
         "browser-check.json": "d07ef1b760d0661b1e5d568811db9f79ac4eeaacb68f80b401e2eb42e7a87ddb"
       },
-      "audit_record": "../../test-records/live-replaced-20261027/10-industrial-robot-downstream-relations.md"
+      "audit_record": "../test-records/live-replaced-20261027/10-industrial-robot-downstream-relations.md"
     }
   ]
 }
