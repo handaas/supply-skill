@@ -27,6 +27,8 @@ from common import REPORT_BANNER, REPORT_TYPE, attach_pagination, call_tool_once
 import mcp_client
 from render_report import render_html, render_markdown, html_to_pdf
 
+from supply_content_review import apply_content_review
+
 SAMPLE_PATH = pathlib.Path(__file__).resolve().parent.parent / "assets" / "report.example.json"
 
 # Supply MCP tools.
@@ -77,6 +79,20 @@ def _first_record(value: Any) -> Dict[str, Any]:
     if isinstance(value, dict):
         return value
     return {}
+
+
+def _join_tags(value: Any) -> str:
+    if isinstance(value, (list, tuple)):
+        return "、".join(_text(v) for v in value if _text(v))
+    text = _text(value)
+    if text.startswith("[") and text.endswith("]"):
+        try:
+            parsed = json.loads(text)
+            if isinstance(parsed, list):
+                return "、".join(_text(v) for v in parsed if _text(v))
+        except (ValueError, TypeError):
+            pass
+    return text
 
 
 def _text(value: Any, limit: int = 0) -> str:
@@ -152,7 +168,7 @@ def build_metrics(products: Any, enterprises: Any, filter_list: Any) -> List[Dic
     metrics: List[Dict[str, Any]] = []
     prod_total = _safe_total(products)
     if prod_total is not None:
-        metrics.append({"label": "下游产品数", "value": _text(prod_total), "hint": "下游产品检索命中条数"})
+        metrics.append({"label": "下游产品关联记录", "value": _text(prod_total), "hint": "按下游行业分组的记录数；非 SKU/产品条目数"})
     ent_total = _safe_total(enterprises)
     if ent_total is not None:
         metrics.append({"label": "下游企业数", "value": _text(ent_total), "hint": "下游企业检索命中条数"})
@@ -243,12 +259,12 @@ def build_core_analysis(products: Any, enterprises: Any, filter_list: Any, subje
         reason_list = reason_field if isinstance(reason_field, list) else ([reason_field] if isinstance(reason_field, dict) else [])
         first_reason = ""
         if reason_list and isinstance(reason_list[0], dict):
-            first_reason = _text(reason_list[0].get("reason"), limit=80)
+            first_reason = _text(reason_list[0].get("reason"))
         elif reason_list:
-            first_reason = _text(reason_list[0], limit=80)
+            first_reason = _text(reason_list[0])
         enterprise_rows.append({
             "企业名称": _text(item.get("name")) or "-",
-            "主营产品": _text(item.get("mainProducts")) or "-",
+            "主营产品": _join_tags(item.get("mainProducts")) or "-",
             "城市": _text(item.get("city")) or "-",
             "注册资本": reg_text or "-",
             "成立时间": _text(item.get("foundTime")) or "-",
@@ -261,7 +277,7 @@ def build_core_analysis(products: Any, enterprises: Any, filter_list: Any, subje
                     "企业名称": _text(item.get("name")) or "-",
                     "下游产品": _text(r.get("headWord")) or "-",
                     "关键词": _text(r.get("tailWord")) or "-",
-                    "关联理由": _text(r.get("reason"), limit=120) or "-",
+                    "关联理由": _text(r.get("reason")) or "-",
                 })
         # 验厂 / 工厂型资质统计
         ent_total_with_flags += 1
@@ -436,7 +452,7 @@ def _reg_capital_stats(rows: List[Mapping[str, Any]], rmb_values: Optional[List[
 def build_insights(subject: Mapping[str, Any], core: Mapping[str, Any], metrics: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
     insights: List[Dict[str, Any]] = []
     metric_map = {m["label"]: str(m["value"]) for m in metrics}
-    prod_n = metric_map.get("下游产品数")
+    prod_n = metric_map.get("下游产品关联记录") or metric_map.get("下游产品数")
     ent_n = metric_map.get("下游企业数")
     fc_n = metric_map.get("高级筛选企业数")
 
@@ -603,7 +619,7 @@ def _assemble(subject: Mapping[str, Any], core: Mapping[str, Any], metrics: Sequ
         import sys
         print("⚠️ 质量门禁警告: 所有核心分析维度均无数据", file=sys.stderr)
     title = f"“{subject.get('keywords') or '目标产品'}” 供应链潜客推荐报告"
-    return {
+    report = {
         "report_type": REPORT_TYPE,
         "title": title,
         "banner": REPORT_BANNER,
@@ -629,6 +645,7 @@ def _assemble(subject: Mapping[str, Any], core: Mapping[str, Any], metrics: Sequ
             "quality_report": quality_report,
         },
     }
+    return apply_content_review(report)
 
 
 def _enterprise_filters(filters: Mapping[str, Any]) -> Dict[str, Any]:
@@ -702,7 +719,6 @@ def _derive_core_metrics(metrics: List[Dict[str, Any]], core: Mapping[str, Any])
     """Derive additional metrics from core analysis sections."""
     industry = core.get("industry_dist", []) if isinstance(core, dict) else []
     region = core.get("region_dist", []) if isinstance(core, dict) else []
-    products = core.get("product_records", []) if isinstance(core, dict) else []
     if isinstance(industry, list) and industry:
         metrics.append({"label": "下游行业数", "value": str(len(industry)), "hint": "覆盖的下游行业数量"})
         try:
@@ -711,21 +727,19 @@ def _derive_core_metrics(metrics: List[Dict[str, Any]], core: Mapping[str, Any])
                 return int(v) if v.isdigit() else 0
             top = max(industry, key=_cnt)
             if top.get("下游行业"):
-                metrics.append({"label": "主要下游行业", "value": str(top["下游行业"]), "hint": "企业最多的下游行业"})
+                metrics.append({"label": "主要下游行业", "value": str(top["下游行业"]), "hint": "下游产品条目最多的行业（非企业样本）"})
         except (ValueError, TypeError):
             pass
     if isinstance(region, list) and region:
-        metrics.append({"label": "覆盖城市数", "value": str(len(region)), "hint": "下游企业所在城市数"})
+        metrics.append({"label": "已返回城市数", "value": str(len(region)), "hint": "当前企业样本中的城市数，不代表全部命中企业"})
         try:
             nums = [int(r.get("企业数", 0)) for r in region if r.get("企业数") and str(r.get("企业数")).isdigit()]
             total = sum(nums)
             if total > 0:
                 top3 = sum(sorted(nums, reverse=True)[:3])
-                metrics.append({"label": "城市CR3", "value": f"{top3/total*100:.1f}%", "hint": "前3大城市企业集中度"})
+                metrics.append({"label": "已返回城市CR3", "value": f"{top3/total*100:.1f}%", "hint": "仅在当前企业样本内计算"})
         except (ValueError, TypeError):
             pass
-    if isinstance(products, list) and products:
-        metrics.append({"label": "下游产品类目", "value": str(len(products)), "hint": "关联的下游产品类别数"})
     return metrics
 
 

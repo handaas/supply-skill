@@ -84,3 +84,18 @@ python scripts/render_report.py --input output/supply.json --output output/suppl
 ```
 
 返回：JSON 路径、HTML 路径、Markdown 路径，以及产品关键词映射与数据口径摘要。
+
+## 内容审校（离线）
+
+对已有 `report.json` 复核而不调用 MCP：`python scripts/supply_content_review.py --input <report.json> --out-dir <dir>`；纯函数 `supply_content_review.apply_content_review(report)`。审校顺序：
+
+1. 层级：下游行业分组数、展开产品条目数、企业数是三个总体；`下游产品关联记录` 不称产品数，行业分布按产品条目统计。上游返回 `-`（未返回下游行业）的记录保留在明细，但不计入行业分布、下游行业数与集中度。
+2. 样本：企业明细是当前样本，城市覆盖/CR3 只写“当前样本 N 家中”；高级筛选独立，不与下游候选求交集。
+3. 字段：主营产品 JSON 数组转顿号文本；科学计数法注册资本转千分位并保留“单位未声明”，单位未声明不做规模分桶。
+4. 文案：推荐理由标为上游营销/解释文案，统计重复模板条数，不当采购需求或供应商资格。
+5. 措辞：不写“覆盖行业越多需求越大”“命中越多意向越强”；正文不出现 `headWord`、`tailWord`、`factoryInspectionType` 等字段名。
+6. 空结果：`source_status=empty` 的维度在摘要与 `executive_summary` 明确写“查询成功但未返回记录”，与 `error`（接口受阻）分开；上游显式返回的 `0` 指标仍按原值保留，不当作缺失。
+
+交付前按最终 `sections` 与实际 body 刷新 `data_source.quality_report`（`0` 计为已填充；`coverage_pct` 仅为章节填充率）；保留原 `generated_at`。
+
+CLI 会拒绝 `--out-dir` 的 `report.json` 解析为 `--input` 的调用；输出目标应位于本 skill 的 `output/content-quality-review/`，不得覆盖 `examples/` 或 `test-records/`。

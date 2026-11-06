@@ -73,6 +73,8 @@ description: Use for generating a professional supply-chain prospect report (供
 4. **渲染三件套**：`compose_report.py --keywords ... [filters] --output ... --report-output ...` 直接产出 JSON + HTML + Markdown。
 5. **返回路径**：返回 JSON、HTML、Markdown 文件路径，以及产品关键词映射与数据口径。
 
+- **渲染前置检查**：执行会产出含图表 HTML / PDF 的报告命令前，先验证 `node --version` 与本 skill 自带 `assets/vendor/echarts.min.js` 存在；内嵌静态 SVG 的生成需要 Node.js（推荐当前 LTS，无需 npm 包），缺失时报告生成明确报错。查看已生成的 HTML 与 Markdown 输出不需要 Node。
+
 ## 脚本速查
 
 ```bash
@@ -128,5 +130,18 @@ python scripts/render_report.py --input output/supply.json --output output/suppl
 - `representative_records`：代表性下游企业记录（企业名称 / 主营产品 / 城市）。
 - `insights`：结构化解读（下游产品广度 / 潜在客户规模 / 下游行业分布 / 地域集中度 / 高级筛选聚焦）。
 - `data_source`：MCP server、数据产品、生成时间、是否 dry-run。
+
+## 内容整理与交付审校
+
+生成后按“原始值 → 规范标签 → 证据位置”逐项整理，保留原始值供核对。`subject.keywordType`、`subject.matchKeyword` 等机器字段保留在 JSON 供系统集成，只从 caliber / 正文可见文本中移除内部代码：
+
+1. **三个层级分开**：下游行业**分组数**（如 8 个）、展开的**产品条目数**（如 43 个）、**企业数**（如 538 家）是不同总体。`下游产品数` 改为 `下游产品关联记录`，行业分布按产品条目统计，`主要下游行业` 只表示产品条目最多，不写“企业最多”。
+2. **企业明细是样本**：命中 538 家、明细 10 家时，城市覆盖/CR3 必须写“当前样本 10 家中”，不能当全部命中企业；高级筛选是独立全库条件，不与下游候选求交集，不推断采购意向。
+3. **商品/企业字段清洗**：`主营产品` 的 JSON 数组转为顿号文本；`6e+06` 转为 `6,000,000` 并保留“单位未声明”；注册资本单位未声明时不做大/中/小/微分桶，不推算平均注册资本。
+4. **推荐理由是上游文案**：`factoryRecommendReason` 属于营销/解释文案，不是采购需求、订单、供应商资格或合作证据；重复模板要标注“N 条使用同一文案”，不把文案条数当需求强度。
+5. **截断与标签**：推荐理由不截断（保留完整句子）；`已验厂`/`工厂型企业` 只是平台字段的样本比例；正文不出现 `headWord`、`tailWord`、`factoryInspectionType`、`isFactoryEnterprise` 等内部字段名。
+6. **交付前自检**：不写“覆盖行业越多，需求越大”“命中越多，采购意向越强”；样本、命中总量、产品条目数不互相补齐。
+
+离线复核已有 JSON（不调用 MCP）：`python scripts/supply_content_review.py --input <report.json> --out-dir <dir>`；纯函数为 `supply_content_review.apply_content_review(report)`。
 
 若 API 调用失败，明确报出缺失的配置 / 缺失的工具 / MCP 错误 / 参数校验错误 / 上游网络错误，给出 dry-run 命令或配置步骤，绝不暴露密钥。
