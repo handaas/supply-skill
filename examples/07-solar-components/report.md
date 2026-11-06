@@ -79,6 +79,8 @@ _下游产品(headWord)→关键词(tailWord)→关联理由（来源：factoryR
 
 ### 下游候选平台字段
 
+_已验厂(factoryInspectionType)与工厂型企业(isFactoryEnterprise)仅为平台返回字段的当前页样本比例；对象是下游候选，不用于认定资质、采购适配或合作风险_
+
 | 字段 | 内容 |
 | --- | --- |
 | 样本数 | 10 |
