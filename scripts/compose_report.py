@@ -25,6 +25,7 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence
 
 from common import REPORT_BANNER, REPORT_TYPE, attach_pagination, call_tool_once, collect_detail_pages, die, json_dumps, load_json_file, paid_call_scope, print_json
 import mcp_client
+from semantic_review import prepare_draft
 from render_report import render_html, render_markdown, html_to_pdf
 
 from supply_content_review import apply_content_review
@@ -787,6 +788,8 @@ def main() -> None:
         payload = build_dry_run_payload(args.keywords, filters)
     else:
         payload = build_payload(args.keywords, filters, args.page_size, args.max_pages)
+
+    payload = prepare_draft(payload)
 
     if args.output:
         out = pathlib.Path(args.output).expanduser()
